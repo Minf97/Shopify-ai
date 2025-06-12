@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "../styles/elite-colors.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,4 +120,44 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Elite Store Custom Styles */
+.elite-gradient {
+  background: linear-gradient(135deg, var(--elite-black) 0%, var(--elite-gray-800) 100%);
+}
+
+.elite-gradient-text {
+  background: linear-gradient(135deg, var(--elite-black) 0%, var(--elite-gray-600) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .elite-gradient-text {
+  background: linear-gradient(135deg, var(--elite-white) 0%, var(--elite-gray-400) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.elite-shadow {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.1);
+}
+
+.dark .elite-shadow {
+  box-shadow: 0 4px 20px -2px rgba(255, 255, 255, 0.05);
+}
+
+.elite-hover {
+  transition: all 0.3s ease-out;
+}
+
+.elite-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.1);
+}
+
+.dark .elite-hover:hover {
+  box-shadow: 0 4px 20px -2px rgba(255, 255, 255, 0.05);
 }

@@ -33,13 +33,13 @@ export function ThemeToggle() {
   const getTitle = () => {
     switch (theme) {
       case "light":
-        return "切换到暗色主题"
+        return "Switch to dark theme"
       case "dark":
-        return "切换到系统主题"
+        return "Switch to system theme"
       case "system":
-        return "切换到亮色主题"
+        return "Switch to light theme"
       default:
-        return "切换主题"
+        return "Toggle theme"
     }
   }
 
@@ -52,7 +52,7 @@ export function ThemeToggle() {
       className="transition-all duration-200 hover:scale-105"
     >
       {getIcon()}
-      <span className="sr-only">切换主题</span>
+      <span className="sr-only">Toggle theme</span>
     </Button>
   )
 } 

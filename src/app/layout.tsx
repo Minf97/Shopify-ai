@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ShopifyStore - 精选商品购物平台",
-  description: "基于 Next.js 和 Shopify 构建的现代化电商平台",
+  title: "EliteStore - Premium Shopping Experience",
+  description: "Discover curated premium products with an exceptional shopping experience. Built with Next.js and Shopify.",
 };
 
 export default function RootLayout({
@@ -25,13 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider
           defaultTheme="system"
-          storageKey="shopify-store-theme"
+          storageKey="elite-store-theme"
         >
           <div className="min-h-screen bg-background">
             <Header />

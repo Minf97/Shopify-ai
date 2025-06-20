@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "products": "Products",
+    "categories": "Categories", 
+    "collections": "Collections",
+    "about": "About",
+    "home": "Home",
+    "signIn": "Sign In",
+    "search": "Search products...",
+    "wishlist": "Wishlist",
+    "cart": "Shopping Cart"
+  },
+  "hero": {
+    "tagline": "Top 1% Premium Products",
+    "title": "Elite Store",
+    "description": "Curated excellence for the discerning few. Premium products that define luxury.",
+    "exploreCollection": "Explore Collection",
+    "watchStory": "Watch Story"
+  },
+  "stats": {
+    "customers": "Happy Customers", 
+    "products": "Premium Products",
+    "rating": "Average Rating",
+    "support": "Support"
+  },
+  "sections": {
+    "featuredCollection": "Featured Collection",
+    "handpicked": "Handpicked for excellence",
+    "viewAll": "View All",
+    "bestSeller": "Best Seller",
+    "addToCart": "Add to Cart",
+    "trendingNow": "Trending Now",
+    "allCategories": "All Categories",
+    "featured": "Featured",
+    "trending": "Trending", 
+    "new": "New",
+    "sale": "Sale"
+  },
+  "features": {
+    "freeShipping": "Free Shipping",
+    "freeShippingDesc": "Free shipping on orders over $100",
+    "securePayment": "Secure Payment", 
+    "securePaymentDesc": "Your payment information is safe",
+    "customerSupport": "24/7 Support",
+    "customerSupportDesc": "Round the clock customer service"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "tryAgain": "Try Again",
+    "close": "Close",
+    "open": "Open",
+    "menu": "Menu"
+  }
+} 

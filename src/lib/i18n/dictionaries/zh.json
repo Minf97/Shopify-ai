@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "products": "产品",
+    "categories": "分类", 
+    "collections": "系列",
+    "about": "关于我们",
+    "home": "首页",
+    "signIn": "登录",
+    "search": "搜索产品...",
+    "wishlist": "心愿单",
+    "cart": "购物车"
+  },
+  "hero": {
+    "tagline": "顶级1%精品",
+    "title": "精英商店",
+    "description": "为品味非凡的少数人精心策划。定义奢华的精品产品。",
+    "exploreCollection": "探索系列",
+    "watchStory": "观看故事"
+  },
+  "stats": {
+    "customers": "满意客户", 
+    "products": "精品产品",
+    "rating": "平均评分",
+    "support": "客服支持"
+  },
+  "sections": {
+    "featuredCollection": "精选系列",
+    "handpicked": "精心挑选的卓越品质",
+    "viewAll": "查看全部",
+    "bestSeller": "畅销产品",
+    "addToCart": "加入购物车",
+    "trendingNow": "热门推荐",
+    "allCategories": "全部分类",
+    "featured": "精选",
+    "trending": "热门", 
+    "new": "新品",
+    "sale": "促销"
+  },
+  "features": {
+    "freeShipping": "免费配送",
+    "freeShippingDesc": "满100美元免费配送",
+    "securePayment": "安全支付", 
+    "securePaymentDesc": "您的支付信息安全可靠",
+    "customerSupport": "24/7客服",
+    "customerSupportDesc": "全天候客户服务"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "tryAgain": "重试",
+    "close": "关闭",
+    "open": "打开",
+    "menu": "菜单"
+  }
+} 

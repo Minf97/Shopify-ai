@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Header } from "@/components/Header";
+import { HeaderI18n } from "@/components/Header-i18n";
+import { i18nConfig, type Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,13 +21,25 @@ export const metadata: Metadata = {
   description: "Discover curated premium products with an exceptional shopping experience. Built with Next.js and Shopify.",
 };
 
-export default function RootLayout({
+export async function generateStaticParams() {
+  return i18nConfig.locales.map((locale) => ({ locale }))
+}
+
+export default async function RootLayout({
   children,
+  params: { locale }
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: Locale };
 }>) {
+  // 验证语言参数
+  const validLocale = i18nConfig.locales.includes(locale) ? locale : i18nConfig.defaultLocale;
+  
+  // 预加载字典数据
+  await getDictionary(validLocale);
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={validLocale} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -34,7 +48,7 @@ export default function RootLayout({
           storageKey="elite-store-theme"
         >
           <div className="min-h-screen bg-background">
-            <Header />
+            <HeaderI18n />
             <main className="flex-1">
               {children}
             </main>
@@ -43,4 +57,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+} 

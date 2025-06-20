@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "products": "商品",
+    "categories": "カテゴリー", 
+    "collections": "コレクション",
+    "about": "会社概要",
+    "home": "ホーム",
+    "signIn": "サインイン",
+    "search": "商品を検索...",
+    "wishlist": "ウィッシュリスト",
+    "cart": "ショッピングカート"
+  },
+  "hero": {
+    "tagline": "トップ1%のプレミアム商品",
+    "title": "エリートストア",
+    "description": "こだわりのある少数の方のための厳選された優秀さ。ラグジュアリーを定義するプレミアム商品。",
+    "exploreCollection": "コレクションを探索",
+    "watchStory": "ストーリーを見る"
+  },
+  "stats": {
+    "customers": "満足のお客様", 
+    "products": "プレミアム商品",
+    "rating": "平均評価",
+    "support": "サポート"
+  },
+  "sections": {
+    "featuredCollection": "注目のコレクション",
+    "handpicked": "優秀さのために厳選",
+    "viewAll": "すべて表示",
+    "bestSeller": "ベストセラー",
+    "addToCart": "カートに追加",
+    "trendingNow": "トレンド",
+    "allCategories": "全カテゴリー",
+    "featured": "注目",
+    "trending": "トレンド", 
+    "new": "新商品",
+    "sale": "セール"
+  },
+  "features": {
+    "freeShipping": "送料無料",
+    "freeShippingDesc": "100ドル以上のご注文で送料無料",
+    "securePayment": "安全な決済", 
+    "securePaymentDesc": "お客様の決済情報は安全です",
+    "customerSupport": "24時間サポート",
+    "customerSupportDesc": "24時間体制のカスタマーサービス"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "tryAgain": "再試行",
+    "close": "閉じる",
+    "open": "開く",
+    "menu": "メニュー"
+  }
+} 

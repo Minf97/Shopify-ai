@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageSwitcher } from "@/components/language-switcher"
+import { CartDrawer } from "@/components/cart-drawer"
 import { 
   ShoppingBag, 
   Search, 
@@ -23,6 +24,7 @@ export function HeaderI18n() {
   const params = useParams()
   const locale = params.locale as Locale
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isCartOpen, setIsCartOpen] = useState(false)
   const [dict, setDict] = useState<Record<string, any> | null>(null)
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export function HeaderI18n() {
               <Link href={`/${locale}`} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <Store className="h-6 w-6 text-primary" />
                 <span className="font-bold text-lg bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                  EliteStore
+                  Grace
                 </span>
               </Link>
 
@@ -121,7 +123,13 @@ export function HeaderI18n() {
               </Button>
 
               {/* Shopping Cart */}
-              <Button variant="ghost" size="icon" title={dict.nav.cart} className="relative">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                title={dict.nav.cart} 
+                className="relative"
+                onClick={() => setIsCartOpen(true)}
+              >
                 <ShoppingBag className="h-4 w-4" />
                 {/* Cart Badge */}
                 <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
@@ -196,7 +204,7 @@ export function HeaderI18n() {
                   onClick={closeMobileMenu}
                 >
                   <Store className="h-6 w-6 text-primary" />
-                  <span className="font-bold text-lg">EliteStore</span>
+                  <span className="font-bold text-lg">Grace</span>
                 </Link>
                 <Button 
                   variant="ghost" 
@@ -267,6 +275,12 @@ export function HeaderI18n() {
           </div>
         </>
       )}
+
+      {/* Cart Drawer */}
+      <CartDrawer 
+        isOpen={isCartOpen} 
+        onClose={() => setIsCartOpen(false)} 
+      />
     </>
   )
 } 

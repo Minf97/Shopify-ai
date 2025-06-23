@@ -11,7 +11,7 @@ export async function shopifyFetch<T>(
     // 读取环境变量
     const storeDomain = process.env.SHOPIFY_STORE_DOMAIN;
     const graphqlEndpoint = process.env.SHOPIFY_GRAPHQL_API_ENDPOINT;
-    const accessToken = process.env.NEXT_PUBLIC_SHOPIFY_FRONTEND_ACCESS_TOKEN;
+    const accessToken = process.env.SHOPIFY_FRONTEND_ACCESS_TOKEN;
 
     // 构建完整的 API URL
     const apiUrl = `https://${storeDomain}${graphqlEndpoint}`;

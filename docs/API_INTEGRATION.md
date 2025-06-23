@@ -75,12 +75,12 @@
 # Shopify
 SHOPIFY_STORE_DOMAIN=your-shop.myshopify.com
 SHOPIFY_GRAPHQL_API_ENDPOINT=/api/2023-10/graphql.json
-NEXT_PUBLIC_SHOPIFY_FRONTEND_ACCESS_TOKEN=your_token
+SHOPIFY_FRONTEND_ACCESS_TOKEN=your_token
 SHOPIFY_ADMIN_API_ACCESS_TOKEN=your_admin_token
 
 # Supabase
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_key
 
 # App

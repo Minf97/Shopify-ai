@@ -8,12 +8,12 @@
 # Shopify Configuration
 SHOPIFY_STORE_DOMAIN=your-shop.myshopify.com
 SHOPIFY_GRAPHQL_API_ENDPOINT=/api/2023-10/graphql.json
-NEXT_PUBLIC_SHOPIFY_FRONTEND_ACCESS_TOKEN=your_storefront_access_token_here
+SHOPIFY_FRONTEND_ACCESS_TOKEN=your_storefront_access_token_here
 SHOPIFY_ADMIN_API_ACCESS_TOKEN=your_admin_api_access_token_here
 
 # Supabase Configuration  
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your_supabase_anon_key_here
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
 
 # App Configuration

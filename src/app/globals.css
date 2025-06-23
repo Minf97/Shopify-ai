@@ -124,40 +124,83 @@
 
 /* Elite Store Custom Styles */
 .elite-gradient {
-  background: linear-gradient(135deg, var(--elite-black) 0%, var(--elite-gray-800) 100%);
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
 }
 
 .elite-gradient-text {
-  background: linear-gradient(135deg, var(--elite-black) 0%, var(--elite-gray-600) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.dark .elite-gradient-text {
-  background: linear-gradient(135deg, var(--elite-white) 0%, var(--elite-gray-400) 100%);
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--muted-foreground)) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .elite-shadow {
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px -2px hsl(var(--primary) / 0.1);
 }
 
 .dark .elite-shadow {
-  box-shadow: 0 4px 20px -2px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px -2px hsl(var(--primary) / 0.15);
 }
 
 .elite-hover {
-  transition: all 0.3s ease-out;
+  transition: colors 0.2s ease-out;
 }
 
-.elite-hover:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.1);
+/* 增强的主题过渡效果 */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dark .elite-hover:hover {
-  box-shadow: 0 4px 20px -2px rgba(255, 255, 255, 0.05);
+/* 改进的焦点样式 */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* 优化的滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* 图片加载优化 */
+img {
+  loading: lazy;
+}
+
+/* 暗色模式下的图片亮度调整 */
+.dark img {
+  /* 移除亮度滤镜以避免模糊效果 */
+}
+
+/* 响应式文本大小 */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* 高对比度支持 */
+@media (prefers-contrast: high) {
+  :root {
+    --border: hsl(0 0% 30%);
+  }
+  
+  .dark {
+    --border: hsl(0 0% 70%);
+  }
 }

@@ -27,7 +27,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
   try {
     const productsResponse = await fetchProductList();
     if (productsResponse.status === 200 && productsResponse.body?.data?.products?.edges) {
-      products = productsResponse.body.data.products.edges.map((edge: any) => ({
+      products = productsResponse.body.data.products.edges.map((edge: { node: any }) => ({
         id: edge.node.id,
         title: edge.node.title,
         price: edge.node.priceRange.minVariantPrice.amount,

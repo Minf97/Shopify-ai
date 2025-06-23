@@ -22,8 +22,6 @@ export async function middleware(request: NextRequest) {
   const pathnameHasLocale = i18nConfig.locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   )
-
-  console.log(pathnameHasLocale, 'pathnameHasLocale');
   
 
   // 如果路径没有语言前缀，重定向到带默认语言的路径
@@ -64,7 +62,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(redirectUrl, { status: 307 })
   }
 
-  // 继续处理 Supabase 会话
+  // 只有在路径已经有有效语言前缀时才进行 Supabase 会话检查
   return await updateSession(request)
 }
 

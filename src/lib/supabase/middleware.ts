@@ -38,11 +38,26 @@ export async function updateSession(request: NextRequest) {
   if (
     !user &&
     !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/auth')
+    !request.nextUrl.pathname.includes('/login') &&
+    !request.nextUrl.pathname.startsWith('/auth') &&
+    !request.nextUrl.pathname.includes('/auth')
   ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
-    url.pathname = '/login'
+    
+    // 获取当前路径的语言前缀
+    const pathSegments = request.nextUrl.pathname.split('/')
+    const localeSegment = pathSegments[1]
+    const validLocales = ['en', 'zh', 'zh-TW', 'ja', 'ko']
+    
+    // 如果路径已经包含有效的语言前缀，使用该语言的登录页面
+    if (localeSegment && validLocales.includes(localeSegment)) {
+      url.pathname = `/${localeSegment}/login`
+    } else {
+      // 否则使用默认语言
+      url.pathname = '/en/login'
+    }
+    
     return NextResponse.redirect(url)
   }
 

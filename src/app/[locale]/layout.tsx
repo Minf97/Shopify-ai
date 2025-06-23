@@ -27,11 +27,12 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({
   children,
-  params: { locale }
+  params
 }: Readonly<{
   children: React.ReactNode;
   params: { locale: Locale };
 }>) {
+  const { locale } = await params;
   // 验证语言参数
   const validLocale = i18nConfig.locales.includes(locale) ? locale : i18nConfig.defaultLocale;
   

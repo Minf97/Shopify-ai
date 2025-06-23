@@ -11,11 +11,11 @@
     "cart": "Shopping Cart"
   },
   "hero": {
-    "tagline": "Top 1% Premium Products",
-    "title": "Elite Store",
-    "description": "Curated excellence for the discerning few. Premium products that define luxury.",
+    "tagline": "Curated Excellence",
+    "title": "Grace",
+    "description": "Discover beauty in simplicity. Premium products for the refined lifestyle.",
     "exploreCollection": "Explore Collection",
-    "watchStory": "Watch Story"
+    "watchStory": "Our Story"
   },
   "stats": {
     "customers": "Happy Customers", 

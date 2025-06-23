@@ -6,7 +6,8 @@
 
 ```bash
 # Shopify Configuration
-NEXT_PUBLIC_SHOPIFY_API_URL=https://your-shop.myshopify.com/api/2023-10/graphql.json
+SHOPIFY_STORE_DOMAIN=your-shop.myshopify.com
+SHOPIFY_GRAPHQL_API_ENDPOINT=/api/2023-10/graphql.json
 NEXT_PUBLIC_SHOPIFY_FRONTEND_ACCESS_TOKEN=your_storefront_access_token_here
 SHOPIFY_ADMIN_API_ACCESS_TOKEN=your_admin_api_access_token_here
 
@@ -29,6 +30,12 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
    - Products: Read access
    - Cart: Read and write access
    - Customer: Read and write access
+
+### 环境变量说明
+
+- `SHOPIFY_STORE_DOMAIN`: 你的 Shopify 商店域名（例如：your-shop.myshopify.com）
+- `SHOPIFY_GRAPHQL_API_ENDPOINT`: GraphQL API 端点路径（通常是：/api/2023-10/graphql.json）
+- 这两个变量会在代码中被组合成完整的 API URL：`https://${SHOPIFY_STORE_DOMAIN}${SHOPIFY_GRAPHQL_API_ENDPOINT}`
 
 ## Supabase 设置
 

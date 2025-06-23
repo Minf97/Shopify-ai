@@ -6,13 +6,17 @@ export async function shopifyFetch<T>(
 ): Promise<{ status: number; body?: T; error?: string }> {
   try {
     // 读取环境变量
-    const apiUrl = process.env.NEXT_PUBLIC_SHOPIFY_API_URL;
+    const storeDomain = process.env.SHOPIFY_STORE_DOMAIN;
+    const graphqlEndpoint = process.env.SHOPIFY_GRAPHQL_API_ENDPOINT;
     const accessToken = process.env.NEXT_PUBLIC_SHOPIFY_FRONTEND_ACCESS_TOKEN;
+
+    // 构建完整的 API URL
+    const apiUrl = `https://${storeDomain}${graphqlEndpoint}`;
 
     console.log(apiUrl, accessToken, "apiUrl, accessToken");
 
-    if (!apiUrl || !accessToken) {
-      throw new Error("API URL or Access Token is not configured.");
+    if (!storeDomain || !graphqlEndpoint || !accessToken) {
+      throw new Error("Shopify configuration is not complete. Please check SHOPIFY_STORE_DOMAIN, SHOPIFY_GRAPHQL_API_ENDPOINT, and access token.");
     }
     // 发送请求
     const response = await fetch(apiUrl, {

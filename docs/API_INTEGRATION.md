@@ -73,7 +73,8 @@
 ### 必需的环境变量
 ```bash
 # Shopify
-NEXT_PUBLIC_SHOPIFY_API_URL=https://your-shop.myshopify.com/api/2023-10/graphql.json
+SHOPIFY_STORE_DOMAIN=your-shop.myshopify.com
+SHOPIFY_GRAPHQL_API_ENDPOINT=/api/2023-10/graphql.json
 NEXT_PUBLIC_SHOPIFY_FRONTEND_ACCESS_TOKEN=your_token
 SHOPIFY_ADMIN_API_ACCESS_TOKEN=your_admin_token
 

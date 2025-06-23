@@ -1,4 +1,7 @@
 import { IProductList, IProductListResponst } from "@/types/shopify";
+import axios from 'axios';
+import { HttpsProxyAgent } from 'https-proxy-agent';
+import { SocksProxyAgent } from 'socks-proxy-agent';
 
 export async function shopifyFetch<T>(
   query: string,
@@ -18,33 +21,64 @@ export async function shopifyFetch<T>(
     if (!storeDomain || !graphqlEndpoint || !accessToken) {
       throw new Error("Shopify configuration is not complete. Please check SHOPIFY_STORE_DOMAIN, SHOPIFY_GRAPHQL_API_ENDPOINT, and access token.");
     }
-    // 发送请求
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Shopify-Storefront-Access-Token": accessToken,
-      },
-      body: JSON.stringify({ query, variables }),
-    });
 
-    if (!response.ok) {
-      throw new Error(`Request failed with status ${response.status}`);
+    // 配置代理（只在服务端）
+    let httpsAgent = undefined;
+    if (typeof window === 'undefined') {
+      const httpsProxy = process.env.HTTPS_PROXY || process.env.https_proxy;
+      const allProxy = process.env.ALL_PROXY || process.env.all_proxy;
+      
+      if (httpsProxy) {
+        console.log("Using HTTPS proxy:", httpsProxy);
+        httpsAgent = new HttpsProxyAgent(httpsProxy);
+      } else if (allProxy) {
+        console.log("Using ALL proxy:", allProxy);
+        if (allProxy.startsWith('socks')) {
+          httpsAgent = new SocksProxyAgent(allProxy);
+        } else {
+          httpsAgent = new HttpsProxyAgent(allProxy);
+        }
+      }
     }
 
-    const responseBody: T = await response.json();
+    // 使用 axios 发送请求
+    const response = await axios({
+      method: 'POST',
+      url: apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': accessToken,
+      },
+      data: { query, variables },
+      httpsAgent: httpsAgent,
+      timeout: 10000, // 10 秒超时
+    });
+
     // 返回结果
     return {
       status: response.status,
-      body: responseBody,
+      body: response.data,
     };
   } catch (error) {
-    // 调试错误处理 部署时删除
-    console.error("Error fetching data:", (error as Error).message);
-    return {
-      status: 500,
-      error: (error as Error).message || "Error receiving data",
-    };
+    // axios 错误处理
+    console.error("=== Shopify Fetch Error (Axios) ===");
+    if (axios.isAxiosError(error)) {
+      console.error("Axios error message:", error.message);
+      console.error("Response status:", error.response?.status);
+      console.error("Response data:", error.response?.data);
+      console.error("Request config:", error.config?.url);
+      
+      return {
+        status: error.response?.status || 500,
+        error: error.message || "Axios request failed",
+      };
+    } else {
+      console.error("Non-axios error:", (error as Error).message);
+      return {
+        status: 500,
+        error: (error as Error).message || "Error receiving data",
+      };
+    }
   }
 }
 

@@ -56,6 +56,19 @@
     "open": "開く",
     "menu": "メニュー"
   },
+  "auth": {
+    "welcomeBack": "おかえりなさい",
+    "signInDescription": "アカウントにサインインして続行",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "forgotPassword": "パスワードを忘れた？",
+    "rememberMe": "30日間ログイン状態を保持",
+    "signIn": "サインイン",
+    "createAccount": "アカウント作成",
+    "orContinueWith": "または続行",
+    "dontHaveAccount": "アカウントをお持ちでない？",
+    "signUpHere": "こちらでサインアップ"
+  },
   "cart": {
     "title": "ショッピングカート",
     "empty": "カートは空です",

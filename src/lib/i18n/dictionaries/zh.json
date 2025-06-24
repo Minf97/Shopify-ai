@@ -56,6 +56,19 @@
     "open": "打开",
     "menu": "菜单"
   },
+  "auth": {
+    "welcomeBack": "欢迎回来",
+    "signInDescription": "登录您的账户以继续",
+    "email": "邮箱",
+    "password": "密码",
+    "forgotPassword": "忘记密码？",
+    "rememberMe": "记住我 30 天",
+    "signIn": "登录",
+    "createAccount": "创建账户",
+    "orContinueWith": "或继续使用",
+    "dontHaveAccount": "还没有账户？",
+    "signUpHere": "在这里注册"
+  },
   "cart": {
     "title": "购物车",
     "empty": "购物车为空",

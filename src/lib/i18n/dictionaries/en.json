@@ -56,6 +56,19 @@
     "open": "Open",
     "menu": "Menu"
   },
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "signInDescription": "Sign in to your account to continue",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me for 30 days",
+    "signIn": "Sign in",
+    "createAccount": "Create Account",
+    "orContinueWith": "Or continue with",
+    "dontHaveAccount": "Don't have an account?",
+    "signUpHere": "Sign up here"
+  },
   "cart": {
     "title": "Shopping Cart",
     "empty": "Your cart is empty",

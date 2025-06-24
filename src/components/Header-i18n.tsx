@@ -7,6 +7,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { CartDrawer } from "@/components/cart-drawer"
 import { SearchBox } from "@/components/search-box"
+import { UserMenu } from "@/components/user-menu"
 import { 
   ShoppingBag, 
   Search, 
@@ -157,7 +158,7 @@ export function HeaderI18n() {
                 title="View GitHub Repository"
               >
                 <Link 
-                  href="https://github.com/shopify" 
+                  href="https://github.com/Minf97/Shopify-ai" 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
@@ -166,13 +167,8 @@ export function HeaderI18n() {
                 </Link>
               </Button>
 
-              {/* Login Button */}
-              <Button variant="default" size="sm" asChild className="hidden sm:flex">
-                <Link href={`/${locale}/login`}>
-                  <User className="h-4 w-4 mr-2" />
-                  {dict.nav.signIn}
-                </Link>
-              </Button>
+              {/* User Menu */}
+              <UserMenu dict={dict} locale={locale} />
 
               {/* Mobile Menu Button */}
               <Button 
@@ -254,13 +250,6 @@ export function HeaderI18n() {
                   {dict.nav.categories}
                 </Link>
                 <Link
-                  href={`/${locale}/collections`}
-                  onClick={closeMobileMenu}
-                  className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
-                >
-                  {dict.nav.collections}
-                </Link>
-                <Link
                   href={`/${locale}/about`}
                   onClick={closeMobileMenu}
                   className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
@@ -269,13 +258,13 @@ export function HeaderI18n() {
                 </Link>
               </nav>
 
-              {/* Login Button */}
-              <Button asChild className="w-full">
-                <Link href={`/${locale}/login`} onClick={closeMobileMenu}>
-                  <User className="h-4 w-4 mr-2" />
-                  {dict.nav.signIn}
-                </Link>
-              </Button>
+              {/* User Menu - Mobile */}
+              <UserMenu 
+                dict={dict} 
+                locale={locale} 
+                isMobile={true} 
+                onItemClick={closeMobileMenu} 
+              />
             </div>
           </div>
         </>

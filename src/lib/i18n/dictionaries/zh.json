@@ -6,6 +6,10 @@
     "about": "关于我们",
     "home": "首页",
     "signIn": "登录",
+    "signOut": "退出登录",
+    "profile": "个人中心",
+    "account": "账户设置",
+    "orders": "我的订单",
     "search": "搜索产品...",
     "wishlist": "心愿单",
     "cart": "购物车"

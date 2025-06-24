@@ -6,6 +6,10 @@
     "about": "About",
     "home": "Home",
     "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "profile": "Profile",
+    "account": "Account",
+    "orders": "Orders",
     "search": "Search products...",
     "wishlist": "Wishlist",
     "cart": "Shopping Cart"

@@ -6,6 +6,10 @@
     "about": "会社概要",
     "home": "ホーム",
     "signIn": "サインイン",
+    "signOut": "サインアウト",
+    "profile": "プロフィール",
+    "account": "アカウント",
+    "orders": "注文履歴",
     "search": "商品を検索...",
     "wishlist": "ウィッシュリスト",
     "cart": "ショッピングカート"

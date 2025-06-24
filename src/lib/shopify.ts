@@ -16,8 +16,6 @@ export async function shopifyFetch<T>(
     // 构建完整的 API URL
     const apiUrl = `https://${storeDomain}${graphqlEndpoint}`;
 
-    console.log(apiUrl, accessToken, "apiUrl, accessToken");
-
     if (!storeDomain || !graphqlEndpoint || !accessToken) {
       throw new Error("Shopify configuration is not complete. Please check SHOPIFY_STORE_DOMAIN, SHOPIFY_GRAPHQL_API_ENDPOINT, and access token.");
     }

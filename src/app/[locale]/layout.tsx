@@ -6,6 +6,7 @@ import { HeaderI18n } from "@/components/Header-i18n";
 import { i18nConfig, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n";
 import { Toaster } from "sonner";
+import { CartProvider } from "@/hooks/use-cart";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,12 +50,14 @@ export default async function RootLayout({
           defaultTheme="system"
           storageKey="elite-store-theme"
         >
-          <div className="min-h-screen bg-background">
-            <HeaderI18n />
-            <main className="flex-1">
-              {children}
-            </main>
-          </div>
+          <CartProvider>
+            <div className="min-h-screen bg-background">
+              <HeaderI18n />
+              <main className="flex-1">
+                {children}
+              </main>
+            </div>
+          </CartProvider>
           <Toaster richColors position="top-right" />
         </ThemeProvider>
       </body>

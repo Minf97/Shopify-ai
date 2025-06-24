@@ -63,15 +63,6 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
     imageAlt: node.merchandise.image?.altText || node.merchandise.product.title
   })) || []
 
-  // 调试信息
-  console.log('=== CartDrawer Debug ===')
-  console.log('Cart:', cart)
-  console.log('Total Items:', totalItems)
-  console.log('Cart Items:', cartItems)
-  console.log('Error:', error)
-  console.log('Is Loading:', isLoading)
-  console.log('=======================')
-
   if (!dict) return null
 
   return (

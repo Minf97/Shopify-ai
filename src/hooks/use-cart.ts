@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, createContext, useContext, ReactNode } from 'react'
 import { 
   createCart, 
   addToCart as addToCartApi, 
@@ -14,7 +14,7 @@ import {
 
 const CART_ID_KEY = 'shopify-cart-id'
 
-export interface CartHookReturn {
+export interface CartContextType {
   cart: Cart | null
   isLoading: boolean
   error: string | null
@@ -27,7 +27,11 @@ export interface CartHookReturn {
   subtotal: number
 }
 
-export function useCart(): CartHookReturn {
+// 创建购物车上下文
+const CartContext = createContext<CartContextType | undefined>(undefined)
+
+// 购物车提供器组件
+export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<Cart | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -103,12 +107,6 @@ export function useCart(): CartHookReturn {
 
   // 添加商品到购物车
   const addToCart = useCallback(async (variantId: string, quantity: number = 1): Promise<boolean> => {
-    console.log('=== useCart addToCart ===')
-    console.log('Variant ID:', variantId)
-    console.log('Quantity:', quantity)
-    console.log('Current cart:', cart)
-    console.log('Current cartId:', getCartId())
-    
     setIsLoading(true)
     setError(null)
 
@@ -118,27 +116,21 @@ export function useCart(): CartHookReturn {
 
       // 如果没有购物车，先创建一个
       if (!cartId || !currentCart) {
-        console.log('Creating new cart...')
         currentCart = await createNewCart()
         if (!currentCart) {
-          console.error('Failed to create new cart')
           return false
         }
         cartId = currentCart.id
-        console.log('New cart created:', cartId)
       }
 
-      console.log('Adding to cart with ID:', cartId)
       const updatedCart = await addToCartApi(cartId, variantId, quantity)
       
       if (updatedCart) {
-        console.log('Cart updated successfully:', updatedCart)
         setCart(updatedCart)
         
         // 同步到用户账户（如果已登录）
         try {
           await syncCartToUser(cartId, updatedCart)
-          console.log('Cart synced to user account')
         } catch (syncError) {
           // 同步失败不影响购物车功能，只记录警告
           console.warn('同步购物车到用户账户失败:', syncError)
@@ -153,7 +145,6 @@ export function useCart(): CartHookReturn {
       return false
     } finally {
       setIsLoading(false)
-      console.log('=== addToCart completed ===')
     }
   }, [cart, getCartId, createNewCart])
 
@@ -167,8 +158,21 @@ export function useCart(): CartHookReturn {
 
     try {
       if (quantity === 0) {
-        // 如果数量为0，删除商品
-        return await removeItem(lineId)
+        // 如果数量为0，直接调用删除API
+        const updatedCart = await removeFromCart(cartId, lineId)
+        if (updatedCart) {
+          setCart(updatedCart)
+          
+          // 同步到用户账户
+          try {
+            await syncCartToUser(cartId, updatedCart)
+          } catch (syncError) {
+            console.warn('同步购物车到用户账户失败:', syncError)
+          }
+          
+          return true
+        }
+        throw new Error('删除商品失败')
       }
 
       const updatedCart = await updateCartItem(cartId, lineId, quantity)
@@ -236,6 +240,9 @@ export function useCart(): CartHookReturn {
   // 初始化购物车
   useEffect(() => {
     const initializeCart = async () => {
+      // 防止重复初始化
+      if (cart || isLoading) return
+
       // 尝试从用户账户获取购物车
       try {
         const userCart = await getUserCart()
@@ -256,9 +263,9 @@ export function useCart(): CartHookReturn {
     }
 
     initializeCart()
-  }, [getCartId, refreshCart, setCartId])
+  }, [cart, isLoading, getCartId, refreshCart, setCartId])
 
-  return {
+  const value: CartContextType = {
     cart,
     isLoading,
     error,
@@ -270,4 +277,22 @@ export function useCart(): CartHookReturn {
     totalItems,
     subtotal
   }
-} 
+
+  return React.createElement(
+    CartContext.Provider,
+    { value },
+    children
+  )
+}
+
+// 使用购物车上下文的 hook
+export function useCart(): CartContextType {
+  const context = useContext(CartContext)
+  if (context === undefined) {
+    throw new Error('useCart must be used within a CartProvider')
+  }
+  return context
+}
+
+// 兼容性：保持原有的接口类型
+export interface CartHookReturn extends CartContextType {} 

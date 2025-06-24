@@ -73,24 +73,27 @@ export function HeaderI18n() {
 
               {/* Main Navigation - Desktop */}
               <nav className="hidden md:flex items-center gap-6">
-                <Link 
-                  href={`/${locale}/products`}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {dict.nav.products}
-                </Link>
-                <Link 
-                  href={`/${locale}/categories`}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {dict.nav.categories}
-                </Link>
-                <Link 
-                  href={`/${locale}/cart`}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {dict.nav.cartDetails}
-                </Link>
+                              <Link 
+                href={`/${locale}/products`}
+                prefetch={true}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {dict.nav.products}
+              </Link>
+              <Link 
+                href={`/${locale}/categories`}
+                prefetch={true}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {dict.nav.categories}
+              </Link>
+              <Link 
+                href={`/${locale}/cart`}
+                prefetch={true}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {dict.nav.cartDetails}
+              </Link>
                 {/* <Link 
                   href={`/${locale}/about
                   `}
@@ -231,6 +234,7 @@ export function HeaderI18n() {
               <nav className="space-y-2 mb-6">
                 <Link
                   href={`/${locale}`}
+                  prefetch={true}
                   onClick={closeMobileMenu}
                   className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
                 >
@@ -238,6 +242,7 @@ export function HeaderI18n() {
                 </Link>
                 <Link
                   href={`/${locale}/products`}
+                  prefetch={true}
                   onClick={closeMobileMenu}
                   className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
                 >
@@ -245,6 +250,7 @@ export function HeaderI18n() {
                 </Link>
                 <Link
                   href={`/${locale}/categories`}
+                  prefetch={true}
                   onClick={closeMobileMenu}
                   className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
                 >
@@ -252,6 +258,7 @@ export function HeaderI18n() {
                 </Link>
                 <Link
                   href={`/${locale}/about`}
+                  prefetch={true}
                   onClick={closeMobileMenu}
                   className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
                 >

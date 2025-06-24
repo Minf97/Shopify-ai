@@ -22,6 +22,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // 性能优化配置
+  experimental: {
+    // 启用优化的包导入
+    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
+  },
+  // 编译优化
+  compiler: {
+    // 移除 console.log (仅在生产环境)
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
 };
 
 export default nextConfig;

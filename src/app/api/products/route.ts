@@ -5,9 +5,15 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const first = parseInt(searchParams.get('first') || '20')
+    const limit = parseInt(searchParams.get('limit') || '20')
     const after = searchParams.get('after')
     const sortKey = searchParams.get('sortKey') || 'CREATED_AT'
     const reverse = searchParams.get('reverse') === 'true'
+    const productType = searchParams.get('productType')
+    const handle = searchParams.get('handle')
+    
+    // 使用limit参数覆盖first参数（为了推荐功能）
+    const actualFirst = limit < first ? limit : first
     
     // 构建查询参数
     let cursor = ''
@@ -15,9 +21,17 @@ export async function GET(request: NextRequest) {
       cursor = `, after: "${after}"`
     }
     
+    // 构建查询字符串
+    let queryString = ''
+    if (productType) {
+      queryString = `, query: "product_type:${productType}"`
+    } else if (handle) {
+      queryString = `, query: "handle:${handle}"`
+    }
+    
     const productsQuery = `
       query {
-        products(first: ${first}${cursor}, sortKey: ${sortKey}, reverse: ${reverse}) {
+        products(first: ${actualFirst}${cursor}, sortKey: ${sortKey}, reverse: ${reverse}${queryString}) {
           edges {
             cursor
             node {

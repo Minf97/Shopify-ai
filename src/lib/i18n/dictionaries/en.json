@@ -1,8 +1,9 @@
 {
-  "nav": {
+    "nav": {
     "products": "Products",
-    "categories": "Categories", 
+    "categories": "Categories",
     "collections": "Collections",
+    "cartDetails": "Cart Details",
     "about": "About",
     "home": "Home",
     "signIn": "Sign In",
@@ -80,7 +81,21 @@
     "shippingNote": "Shipping calculated at checkout",
     "updateFailed": "Update failed",
     "removeFailed": "Remove failed",
-    "retry": "Retry"
+    "retry": "Retry",
+    "detailsTitle": "Cart Details",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total",
+    "remove": "Remove",
+    "update": "Update",
+    "recommendedProducts": "Recommended Products",
+    "similarProducts": "Similar Products",
+    "basedOnCart": "Based on items in your cart",
+    "addToCart": "Add to Cart",
+    "backToShopping": "Back to Shopping",
+    "proceedToCheckout": "Proceed to Checkout",
+    "cartSummary": "Cart Summary",
+    "shippingCalculated": "Shipping calculated at checkout"
   },
   "search": {
     "placeholder": "Search products...",

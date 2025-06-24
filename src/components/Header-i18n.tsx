@@ -86,17 +86,18 @@ export function HeaderI18n() {
                   {dict.nav.categories}
                 </Link>
                 <Link 
-                  href={`/${locale}/collections`}
+                  href={`/${locale}/cart`}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {dict.nav.collections}
+                  {dict.nav.cartDetails}
                 </Link>
-                <Link 
-                  href={`/${locale}/about`}
+                {/* <Link 
+                  href={`/${locale}/about
+                  `}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {dict.nav.about}
-                </Link>
+                </Link> */}
               </nav>
             </div>
 

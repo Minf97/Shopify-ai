@@ -73,5 +73,16 @@
     "suggestions": "搜索建议",
     "searchHistory": "搜索历史",
     "clearHistory": "清除历史"
+  },
+  "categories": {
+    "title": "商品分类",
+    "description": "浏览我们的商品分类，发现您喜爱的产品",
+    "allCategories": "全部分类",
+    "noProducts": "该分类暂无商品",
+    "loadingProducts": "正在加载商品...",
+    "errorLoading": "加载失败，请重试",
+    "productsCount": "件商品",
+    "showMore": "显示更多",
+    "backToCategories": "返回分类"
   }
 } 

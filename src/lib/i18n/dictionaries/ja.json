@@ -73,5 +73,16 @@
     "suggestions": "検索候補",
     "searchHistory": "検索履歴",
     "clearHistory": "履歴をクリア"
+  },
+  "categories": {
+    "title": "商品カテゴリー",
+    "description": "商品カテゴリーを閲覧して、お気に入りのアイテムを見つけてください",
+    "allCategories": "全カテゴリー",
+    "noProducts": "このカテゴリーには商品がありません",
+    "loadingProducts": "商品を読み込み中...",
+    "errorLoading": "読み込みに失敗しました。再試行してください",
+    "productsCount": "商品",
+    "showMore": "もっと見る",
+    "backToCategories": "カテゴリーに戻る"
   }
 } 

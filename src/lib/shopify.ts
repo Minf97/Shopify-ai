@@ -171,6 +171,73 @@ export async function fetchCollections(): Promise<{ status: number; body?: any; 
   }
 }
 
+// 根据分类获取商品
+export async function fetchProductsByCollection(collectionHandle: string, first: number = 12): Promise<{ status: number; body?: any; error?: string }> {
+  const productsQuery = `
+    query {
+      collection(handle: "${collectionHandle}") {
+        id
+        title
+        description
+        image {
+          url
+          altText
+        }
+        products(first: ${first}) {
+          edges {
+            node {
+              id
+              title
+              handle
+              description
+              tags
+              productType
+              priceRange {
+                minVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
+              images(first: 1) {
+                edges {
+                  node {
+                    url
+                    altText
+                  }
+                }
+              }
+              variants(first: 1) {
+                edges {
+                  node {
+                    id
+                    title
+                    price {
+                      amount
+                      currencyCode
+                    }
+                    availableForSale
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const result = await shopifyFetch(productsQuery);
+  if (result.status === 200) {
+    return { status: 200, body: result.body };
+  } else {
+    console.error("Failed to fetch products by collection:", result.error);
+    return {
+      status: 500,
+      error: result.error || "Failed to fetch products by collection.",
+    };
+  }
+}
+
 // 根据分类和搜索词获取商品建议
 export async function fetchProductSuggestions(query?: string, collectionHandle?: string): Promise<{ status: number; body?: any; error?: string }> {
   let productsQuery = `

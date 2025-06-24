@@ -8,6 +8,8 @@ import { getDictionary } from "@/lib/i18n";
 import { Toaster } from "sonner";
 import { CartProvider } from "@/hooks/use-cart";
 import { LoadingBar } from "@/components/loading-bar";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -62,6 +64,8 @@ export default async function RootLayout({
           </CartProvider>
           <Toaster richColors position="top-right" />
         </ThemeProvider>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

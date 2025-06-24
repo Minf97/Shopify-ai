@@ -1,22 +1,15 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { X, Plus, Minus, ShoppingBag } from "lucide-react"
+import { X, Plus, Minus, ShoppingBag, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import { type Locale } from "@/lib/i18n/config"
 import { getDictionary } from "@/lib/i18n"
-
-interface CartItem {
-  id: string
-  title: string
-  price: string
-  quantity: number
-  image?: string
-  variant?: string
-}
+import { useCart } from "@/hooks/use-cart"
+import { toast } from "sonner"
 
 interface CartDrawerProps {
   isOpen: boolean
@@ -27,45 +20,57 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const params = useParams()
   const locale = params.locale as Locale
   const [dict, setDict] = useState<Record<string, any> | null>(null)
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    // Mock data for demonstration
-    {
-      id: "1",
-      title: "Ceramic Mug",
-      price: "25.00",
-      quantity: 1,
-      image: "https://picsum.photos/150/150?random=1",
-      variant: "Black/Wood"
-    },
-    {
-      id: "2", 
-      title: "Leather Tote Bag",
-      price: "89.00",
-      quantity: 2,
-      image: "https://picsum.photos/150/150?random=2",
-      variant: "Brown"
-    }
-  ])
+  const { cart, isLoading, error, updateQuantity, removeItem, totalItems, subtotal } = useCart()
 
   useEffect(() => {
     getDictionary(locale).then(setDict)
   }, [locale])
 
-  const updateQuantity = (id: string, newQuantity: number) => {
-    if (newQuantity === 0) {
-      setCartItems(prev => prev.filter(item => item.id !== id))
-    } else {
-      setCartItems(prev => 
-        prev.map(item => 
-          item.id === id ? { ...item, quantity: newQuantity } : item
-        )
+  // 处理数量变更
+  const handleQuantityChange = async (lineId: string, newQuantity: number) => {
+    const success = await updateQuantity(lineId, newQuantity)
+    if (!success) {
+      toast.error(
+        locale === 'zh' ? '更新失败' :
+        locale === 'ja' ? '更新に失敗しました' :
+        'Update failed'
       )
     }
   }
 
-  const subtotal = cartItems.reduce((sum, item) => 
-    sum + parseFloat(item.price) * item.quantity, 0
-  )
+  // 处理商品删除
+  const handleRemoveItem = async (lineId: string) => {
+    const success = await removeItem(lineId)
+    if (!success) {
+      toast.error(
+        locale === 'zh' ? '删除失败' :
+        locale === 'ja' ? '削除に失敗しました' :
+        'Remove failed'
+      )
+    }
+  }
+
+  // 获取购物车商品列表
+  const cartItems = cart?.lines.edges.map(({ node }) => ({
+    id: node.id,
+    lineId: node.id,
+    title: node.merchandise.product.title,
+    variantTitle: node.merchandise.title,
+    price: node.merchandise.priceV2.amount,
+    currencyCode: node.merchandise.priceV2.currencyCode,
+    quantity: node.quantity,
+    image: node.merchandise.image?.url,
+    imageAlt: node.merchandise.image?.altText || node.merchandise.product.title
+  })) || []
+
+  // 调试信息
+  console.log('=== CartDrawer Debug ===')
+  console.log('Cart:', cart)
+  console.log('Total Items:', totalItems)
+  console.log('Cart Items:', cartItems)
+  console.log('Error:', error)
+  console.log('Is Loading:', isLoading)
+  console.log('=======================')
 
   if (!dict) return null
 
@@ -106,7 +111,31 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
           {/* Cart Items */}
           <div className="flex-1 overflow-y-auto p-4">
-            {cartItems.length === 0 ? (
+            {isLoading ? (
+              <div className="text-center py-12">
+                <Loader2 className="h-8 w-8 mx-auto animate-spin text-muted-foreground mb-4" />
+                <p className="text-muted-foreground">
+                  {locale === 'zh' && '加载中...'}
+                  {locale === 'ja' && '読み込み中...'}
+                  {locale === 'en' && 'Loading...'}
+                </p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-12">
+                <ShoppingBag className="h-12 w-12 mx-auto text-destructive mb-4" />
+                <p className="text-destructive text-sm">{error}</p>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="mt-2"
+                  onClick={() => window.location.reload()}
+                >
+                  {locale === 'zh' && '重试'}
+                  {locale === 'ja' && '再試行'}
+                  {locale === 'en' && 'Retry'}
+                </Button>
+              </div>
+            ) : cartItems.length === 0 ? (
               <div className="text-center py-12">
                 <ShoppingBag className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                 <p className="text-muted-foreground">
@@ -124,7 +153,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       {item.image && (
                         <Image
                           src={item.image}
-                          alt={item.title}
+                          alt={item.imageAlt}
                           fill
                           className="object-cover"
                         />
@@ -134,11 +163,14 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                     {/* Product Info */}
                     <div className="flex-1 min-w-0">
                       <h3 className="font-medium text-sm truncate">{item.title}</h3>
-                      {item.variant && (
-                        <p className="text-xs text-muted-foreground">{item.variant}</p>
+                      {item.variantTitle !== item.title && (
+                        <p className="text-xs text-muted-foreground">{item.variantTitle}</p>
                       )}
                       <div className="flex items-center justify-between mt-2">
-                        <span className="font-semibold">${item.price}</span>
+                        <span className="font-semibold">
+                          {item.currencyCode === 'USD' ? '$' : item.currencyCode + ' '}
+                          {parseFloat(item.price).toFixed(2)}
+                        </span>
                         
                         {/* Quantity Controls */}
                         <div className="flex items-center gap-1">
@@ -146,7 +178,8 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                             variant="outline"
                             size="icon"
                             className="h-6 w-6"
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            disabled={isLoading}
+                            onClick={() => handleQuantityChange(item.lineId, item.quantity - 1)}
                           >
                             <Minus className="h-3 w-3" />
                           </Button>
@@ -155,7 +188,8 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                             variant="outline"
                             size="icon"
                             className="h-6 w-6"
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            disabled={isLoading}
+                            onClick={() => handleQuantityChange(item.lineId, item.quantity + 1)}
                           >
                             <Plus className="h-3 w-3" />
                           </Button>
@@ -169,7 +203,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           </div>
 
           {/* Footer */}
-          {cartItems.length > 0 && (
+          {!isLoading && !error && cartItems.length > 0 && (
             <div className="border-t p-4 space-y-4">
               {/* Subtotal */}
               <div className="flex items-center justify-between text-lg font-semibold">
@@ -178,7 +212,19 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   {locale === 'ja' && '小計'}
                   {locale === 'en' && 'Subtotal'}
                 </span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>
+                  {cart?.cost.totalAmount.currencyCode === 'USD' ? '$' : cart?.cost.totalAmount.currencyCode + ' '}
+                  {subtotal.toFixed(2)}
+                </span>
+              </div>
+
+              {/* Item Count */}
+              <div className="flex items-center justify-between text-sm text-muted-foreground">
+                <span>
+                  {locale === 'zh' && `${totalItems} 件商品`}
+                  {locale === 'ja' && `${totalItems} 個のアイテム`}
+                  {locale === 'en' && `${totalItems} item${totalItems !== 1 ? 's' : ''}`}
+                </span>
               </div>
 
               {/* Shipping Note */}
@@ -189,11 +235,26 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               </p>
 
               {/* Checkout Button */}
-              <Button asChild className="w-full">
-                <Link href={`/${locale}/checkout`} onClick={onClose}>
-                  {locale === 'zh' && '结账'}
-                  {locale === 'ja' && '決済へ進む'}
-                  {locale === 'en' && 'Checkout'}
+              <Button 
+                asChild 
+                className="w-full" 
+                disabled={isLoading || cartItems.length === 0}
+              >
+                <Link href={cart?.checkoutUrl || '#'} onClick={onClose}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      {locale === 'zh' && '处理中...'}
+                      {locale === 'ja' && '処理中...'}
+                      {locale === 'en' && 'Processing...'}
+                    </>
+                  ) : (
+                    <>
+                      {locale === 'zh' && '结账'}
+                      {locale === 'ja' && '決済へ進む'}
+                      {locale === 'en' && 'Checkout'}
+                    </>
+                  )}
                 </Link>
               </Button>
 

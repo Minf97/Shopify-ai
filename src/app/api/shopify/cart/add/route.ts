@@ -55,6 +55,7 @@ export async function POST(request: NextRequest) {
     const { cartId, variantId, quantity = 1 } = body
 
     if (!cartId || !variantId) {
+      console.error('Missing required fields:', { cartId: !!cartId, variantId: !!variantId })
       return NextResponse.json(
         { error: 'Cart ID and Variant ID are required' },
         { status: 400 }

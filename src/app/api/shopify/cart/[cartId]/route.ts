@@ -45,12 +45,17 @@ const GET_CART_QUERY = `
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { cartId: string } }
+  { params }: { params: Promise<{ cartId: string }> }
 ) {
   try {
-    const { cartId } = params
+    // 在 Next.js 15 中，params 是一个 Promise
+    const { cartId: encodedCartId } = await params
+    
+    // 对 Cart ID 进行解码
+    const cartId = decodeURIComponent(encodedCartId)
 
     if (!cartId) {
+      console.error('Cart ID is missing')
       return NextResponse.json(
         { error: 'Cart ID is required' },
         { status: 400 }
@@ -59,7 +64,6 @@ export async function GET(
 
     const variables = { cartId }
     const result = await shopifyFetch(GET_CART_QUERY, variables)
-
     if (result.status !== 200 || result.error) {
       return NextResponse.json(
         { error: result.error || 'Failed to fetch cart' },

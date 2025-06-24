@@ -4,6 +4,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { CartDrawer } from "@/components/cart-drawer"
+import { useCart } from "@/hooks/use-cart"
 import { 
   ShoppingBag, 
   Search, 
@@ -17,6 +19,8 @@ import {
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false)
+  const { totalItems } = useCart()
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -24,6 +28,14 @@ export function Header() {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
+  }
+
+  const toggleCartDrawer = () => {
+    setIsCartDrawerOpen(!isCartDrawerOpen)
+  }
+
+  const closeCartDrawer = () => {
+    setIsCartDrawerOpen(false)
   }
 
   return (
@@ -97,12 +109,20 @@ export function Header() {
               </Button>
 
               {/* Shopping Cart */}
-              <Button variant="ghost" size="icon" title="Shopping Cart" className="relative">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                title="Shopping Cart" 
+                className="relative"
+                onClick={toggleCartDrawer}
+              >
                 <ShoppingBag className="h-4 w-4" />
                 {/* Cart Badge */}
-                <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
-                  2
-                </span>
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
+                    {totalItems > 99 ? '99+' : totalItems}
+                  </span>
+                )}
                 <span className="sr-only">Shopping Cart</span>
               </Button>
 
@@ -257,19 +277,27 @@ export function Header() {
                 <Button 
                   variant="outline" 
                   className="w-full justify-start gap-3 relative"
-                  onClick={closeMobileMenu}
+                  onClick={() => {
+                    closeMobileMenu()
+                    toggleCartDrawer()
+                  }}
                 >
                   <ShoppingBag className="h-4 w-4" />
                   Shopping Cart
-                  <span className="absolute right-3 h-5 w-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
-                    2
-                  </span>
+                  {totalItems > 0 && (
+                    <span className="absolute right-3 h-5 w-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
+                      {totalItems > 99 ? '99+' : totalItems}
+                    </span>
+                  )}
                 </Button>
               </div>
             </div>
           </div>
         </>
       )}
+
+      {/* Cart Drawer */}
+      <CartDrawer isOpen={isCartDrawerOpen} onClose={closeCartDrawer} />
     </>
   )
 } 

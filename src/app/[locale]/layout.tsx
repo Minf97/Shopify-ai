@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { HeaderI18n } from "@/components/Header-i18n";
 import { i18nConfig, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,6 +55,7 @@ export default async function RootLayout({
               {children}
             </main>
           </div>
+          <Toaster richColors position="top-right" />
         </ThemeProvider>
       </body>
     </html>

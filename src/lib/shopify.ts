@@ -107,6 +107,19 @@ export async function fetchProductList(): Promise<IProductListResponst> {
                 }
               }
             }
+            variants(first: 1) {
+              edges {
+                node {
+                  id
+                  title
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  availableForSale
+                }
+              }
+            }
           }
         }
       }

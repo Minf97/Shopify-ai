@@ -27,6 +27,7 @@ alwaysApply: true
 
 ## locale
 当你要获取多语言时，请记住：
+- 可以参考 `next-intl` 的文档: https://next-intl.dev/
 - 服务端获取语言，可以直接从 params 中获取
 - 客户端获取语言，可以使用 useLocale() 获取
 - 请不要将 locale 作为组件的入参！

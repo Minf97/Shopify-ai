@@ -81,7 +81,8 @@ export async function POST(request: NextRequest) {
 
     const cartData = (result.body as CartResponse)?.data?.cartCreate
 
-    if (cartData?.userErrors?.length > 0) {
+
+    if (cartData?.userErrors?.length && cartData.userErrors.length > 0) {
       return NextResponse.json(
         { error: cartData.userErrors[0].message },
         { status: 400 }

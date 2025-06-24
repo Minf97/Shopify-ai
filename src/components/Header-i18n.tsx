@@ -19,6 +19,7 @@ import {
 import { useParams } from "next/navigation"
 import { type Locale } from "@/lib/i18n/config"
 import { getDictionary } from "@/lib/i18n"
+import { useCart } from "@/hooks/use-cart"
 
 export function HeaderI18n() {
   const params = useParams()
@@ -26,6 +27,7 @@ export function HeaderI18n() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [dict, setDict] = useState<Record<string, any> | null>(null)
+  const { totalItems } = useCart()
 
   useEffect(() => {
     getDictionary(locale).then(setDict)
@@ -132,9 +134,11 @@ export function HeaderI18n() {
               >
                 <ShoppingBag className="h-4 w-4" />
                 {/* Cart Badge */}
-                <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
-                  2
-                </span>
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
                 <span className="sr-only">{dict.nav.cart}</span>
               </Button>
 

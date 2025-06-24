@@ -25,6 +25,9 @@ export interface CartContextType {
   refreshCart: () => Promise<void>
   totalItems: number
   subtotal: number
+  // 新增：细粒度的加载状态
+  isInitializing: boolean
+  isAddingItem: boolean
 }
 
 // 创建购物车上下文
@@ -35,6 +38,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<Cart | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isInitializing, setIsInitializing] = useState(false)
+  const [isAddingItem, setIsAddingItem] = useState(false)
 
   // 获取购物车总商品数量
   const totalItems = cart?.totalQuantity || 0
@@ -63,7 +68,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const cartId = getCartId()
     if (!cartId) return
 
-    setIsLoading(true)
+    setIsInitializing(true)
     setError(null)
 
     try {
@@ -79,7 +84,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setError('获取购物车失败')
       console.error('Error refreshing cart:', err)
     } finally {
-      setIsLoading(false)
+      setIsInitializing(false)
     }
   }, [getCartId, setCartId])
 
@@ -107,7 +112,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // 添加商品到购物车
   const addToCart = useCallback(async (variantId: string, quantity: number = 1): Promise<boolean> => {
-    setIsLoading(true)
+    setIsAddingItem(true)
     setError(null)
 
     try {
@@ -144,7 +149,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       console.error('Error adding to cart:', err)
       return false
     } finally {
-      setIsLoading(false)
+      setIsAddingItem(false)
     }
   }, [cart, getCartId, createNewCart])
 
@@ -153,7 +158,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const cartId = getCartId()
     if (!cartId) return false
 
-    setIsLoading(true)
+    // 不设置全局 loading 状态，由组件自己管理局部状态
     setError(null)
 
     try {
@@ -193,8 +198,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setError('更新商品数量失败')
       console.error('Error updating quantity:', err)
       return false
-    } finally {
-      setIsLoading(false)
     }
   }, [getCartId])
 
@@ -203,7 +206,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const cartId = getCartId()
     if (!cartId) return false
 
-    setIsLoading(true)
+    // 不设置全局 loading 状态，由组件自己管理局部状态
     setError(null)
 
     try {
@@ -225,8 +228,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setError('删除商品失败')
       console.error('Error removing item:', err)
       return false
-    } finally {
-      setIsLoading(false)
     }
   }, [getCartId])
 
@@ -241,7 +242,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const initializeCart = async () => {
       // 防止重复初始化
-      if (cart || isLoading) return
+      if (cart || isInitializing) return
 
       // 尝试从用户账户获取购物车
       try {
@@ -263,7 +264,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
 
     initializeCart()
-  }, [cart, isLoading, getCartId, refreshCart, setCartId])
+  }, [cart, isInitializing, getCartId, refreshCart, setCartId])
 
   const value: CartContextType = {
     cart,
@@ -275,7 +276,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     clearCart,
     refreshCart,
     totalItems,
-    subtotal
+    subtotal,
+    isInitializing,
+    isAddingItem
   }
 
   return React.createElement(

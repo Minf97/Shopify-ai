@@ -20,7 +20,8 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const params = useParams()
   const locale = params.locale as Locale
   const [dict, setDict] = useState<Record<string, any> | null>(null)
-  const { cart, isLoading, error, updateQuantity, removeItem, totalItems, subtotal } = useCart()
+  const [loadingItems, setLoadingItems] = useState<Set<string>>(new Set())
+  const { cart, isLoading, isInitializing, error, updateQuantity, removeItem, totalItems, subtotal } = useCart()
 
   useEffect(() => {
     getDictionary(locale).then(setDict)
@@ -28,25 +29,37 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
   // 处理数量变更
   const handleQuantityChange = async (lineId: string, newQuantity: number) => {
-    const success = await updateQuantity(lineId, newQuantity)
-    if (!success) {
-      toast.error(
-        locale === 'zh' ? '更新失败' :
-        locale === 'ja' ? '更新に失敗しました' :
-        'Update failed'
-      )
+    setLoadingItems(prev => new Set(prev).add(lineId))
+    
+    try {
+      const success = await updateQuantity(lineId, newQuantity)
+      if (!success) {
+        toast.error(dict?.cart?.updateFailed || 'Update failed')
+      }
+    } finally {
+      setLoadingItems(prev => {
+        const newSet = new Set(prev)
+        newSet.delete(lineId)
+        return newSet
+      })
     }
   }
 
   // 处理商品删除
   const handleRemoveItem = async (lineId: string) => {
-    const success = await removeItem(lineId)
-    if (!success) {
-      toast.error(
-        locale === 'zh' ? '删除失败' :
-        locale === 'ja' ? '削除に失敗しました' :
-        'Remove failed'
-      )
+    setLoadingItems(prev => new Set(prev).add(lineId))
+    
+    try {
+      const success = await removeItem(lineId)
+      if (!success) {
+        toast.error(dict?.cart?.removeFailed || 'Remove failed')
+      }
+    } finally {
+      setLoadingItems(prev => {
+        const newSet = new Set(prev)
+        newSet.delete(lineId)
+        return newSet
+      })
     }
   }
 
@@ -87,7 +100,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             <div className="flex items-center gap-2">
               <ShoppingBag className="h-5 w-5" />
               <h2 className="text-lg font-semibold">
-                {dict.nav?.cart || 'Shopping Cart'}
+                {dict.cart?.title || dict.nav?.cart || 'Shopping Cart'}
               </h2>
             </div>
             <Button
@@ -102,13 +115,11 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
           {/* Cart Items */}
           <div className="flex-1 overflow-y-auto p-4">
-            {isLoading ? (
+            {isInitializing ? (
               <div className="text-center py-12">
                 <Loader2 className="h-8 w-8 mx-auto animate-spin text-muted-foreground mb-4" />
                 <p className="text-muted-foreground">
-                  {locale === 'zh' && '加载中...'}
-                  {locale === 'ja' && '読み込み中...'}
-                  {locale === 'en' && 'Loading...'}
+                  {dict.common?.loading || 'Loading...'}
                 </p>
               </div>
             ) : error ? (
@@ -121,87 +132,103 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   className="mt-2"
                   onClick={() => window.location.reload()}
                 >
-                  {locale === 'zh' && '重试'}
-                  {locale === 'ja' && '再試行'}
-                  {locale === 'en' && 'Retry'}
+                  {dict.cart?.retry || dict.common?.tryAgain || 'Retry'}
                 </Button>
               </div>
             ) : cartItems.length === 0 ? (
               <div className="text-center py-12">
                 <ShoppingBag className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                 <p className="text-muted-foreground">
-                  {locale === 'zh' && '购物车为空'}
-                  {locale === 'ja' && 'カートは空です'}
-                  {locale === 'en' && 'Your cart is empty'}
+                  {dict.cart?.empty || 'Your cart is empty'}
                 </p>
               </div>
             ) : (
               <div className="space-y-4">
-                {cartItems.map((item) => (
-                  <div key={item.id} className="flex gap-3 p-3 bg-card rounded-lg border">
-                    {/* Product Image */}
-                    <div className="relative w-16 h-16 bg-muted rounded-md overflow-hidden flex-shrink-0">
-                      {item.image && (
-                        <Image
-                          src={item.image}
-                          alt={item.imageAlt}
-                          fill
-                          className="object-cover"
-                        />
-                      )}
-                    </div>
+                {cartItems.map((item) => {
+                  const isItemLoading = loadingItems.has(item.lineId)
+                  
+                  return (
+                    <div 
+                      key={item.id} 
+                      className={`flex gap-3 p-3 bg-card rounded-lg border transition-opacity ${
+                        isItemLoading ? 'opacity-50' : ''
+                      }`}
+                    >
+                      {/* Product Image */}
+                      <div className="relative w-16 h-16 bg-muted rounded-md overflow-hidden flex-shrink-0">
+                        {item.image && (
+                          <Image
+                            src={item.image}
+                            alt={item.imageAlt}
+                            fill
+                            className="object-cover"
+                          />
+                        )}
+                        {isItemLoading && (
+                          <div className="absolute inset-0 bg-background/50 flex items-center justify-center">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          </div>
+                        )}
+                      </div>
 
-                    {/* Product Info */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-sm truncate">{item.title}</h3>
-                      {item.variantTitle !== item.title && (
-                        <p className="text-xs text-muted-foreground">{item.variantTitle}</p>
-                      )}
-                      <div className="flex items-center justify-between mt-2">
-                        <span className="font-semibold">
-                          {item.currencyCode === 'USD' ? '$' : item.currencyCode + ' '}
-                          {parseFloat(item.price).toFixed(2)}
-                        </span>
-                        
-                        {/* Quantity Controls */}
-                        <div className="flex items-center gap-1">
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-6 w-6"
-                            disabled={isLoading}
-                            onClick={() => handleQuantityChange(item.lineId, item.quantity - 1)}
-                          >
-                            <Minus className="h-3 w-3" />
-                          </Button>
-                          <span className="w-8 text-center text-sm">{item.quantity}</span>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-6 w-6"
-                            disabled={isLoading}
-                            onClick={() => handleQuantityChange(item.lineId, item.quantity + 1)}
-                          >
-                            <Plus className="h-3 w-3" />
-                          </Button>
+                      {/* Product Info */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-medium text-sm truncate">{item.title}</h3>
+                        {item.variantTitle !== item.title && (
+                          <p className="text-xs text-muted-foreground">{item.variantTitle}</p>
+                        )}
+                        <div className="flex items-center justify-between mt-2">
+                          <span className="font-semibold">
+                            {item.currencyCode === 'USD' ? '$' : item.currencyCode + ' '}
+                            {parseFloat(item.price).toFixed(2)}
+                          </span>
+                          
+                          {/* Quantity Controls */}
+                          <div className="flex items-center gap-1">
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-6 w-6"
+                              disabled={isItemLoading}
+                              onClick={() => handleQuantityChange(item.lineId, item.quantity - 1)}
+                            >
+                              {isItemLoading ? (
+                                <Loader2 className="h-3 w-3 animate-spin" />
+                              ) : (
+                                <Minus className="h-3 w-3" />
+                              )}
+                            </Button>
+                            <span className="w-8 text-center text-sm">{item.quantity}</span>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-6 w-6"
+                              disabled={isItemLoading}
+                              onClick={() => handleQuantityChange(item.lineId, item.quantity + 1)}
+                            >
+                              {isItemLoading ? (
+                                <Loader2 className="h-3 w-3 animate-spin" />
+                              ) : (
+                                <Plus className="h-3 w-3" />
+                              )}
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             )}
           </div>
 
           {/* Footer */}
-          {!isLoading && !error && cartItems.length > 0 && (
+          {!isInitializing && !error && cartItems.length > 0 && (
             <div className="border-t p-4 space-y-4">
               {/* Subtotal */}
               <div className="flex items-center justify-between text-lg font-semibold">
                 <span>
-                  {locale === 'zh' && '小计'}
-                  {locale === 'ja' && '小計'}
-                  {locale === 'en' && 'Subtotal'}
+                  {dict.cart?.subtotal || 'Subtotal'}
                 </span>
                 <span>
                   {cart?.cost.totalAmount.currencyCode === 'USD' ? '$' : cart?.cost.totalAmount.currencyCode + ' '}
@@ -212,39 +239,29 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               {/* Item Count */}
               <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <span>
-                  {locale === 'zh' && `${totalItems} 件商品`}
-                  {locale === 'ja' && `${totalItems} 個のアイテム`}
-                  {locale === 'en' && `${totalItems} item${totalItems !== 1 ? 's' : ''}`}
+                  {totalItems} {dict.cart?.items || 'items'}
                 </span>
               </div>
 
               {/* Shipping Note */}
               <p className="text-xs text-muted-foreground">
-                {locale === 'zh' && '运费将在结账时计算'}
-                {locale === 'ja' && '送料は決済時に計算されます'}
-                {locale === 'en' && 'Shipping calculated at checkout'}
+                {dict.cart?.shippingNote || 'Shipping calculated at checkout'}
               </p>
 
               {/* Checkout Button */}
               <Button 
                 asChild 
                 className="w-full" 
-                disabled={isLoading || cartItems.length === 0}
+                disabled={isInitializing || cartItems.length === 0 || loadingItems.size > 0}
               >
                 <Link href={cart?.checkoutUrl || '#'} onClick={onClose}>
-                  {isLoading ? (
+                  {isInitializing || loadingItems.size > 0 ? (
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      {locale === 'zh' && '处理中...'}
-                      {locale === 'ja' && '処理中...'}
-                      {locale === 'en' && 'Processing...'}
+                      {dict.cart?.processing || 'Processing...'}
                     </>
                   ) : (
-                    <>
-                      {locale === 'zh' && '结账'}
-                      {locale === 'ja' && '決済へ進む'}
-                      {locale === 'en' && 'Checkout'}
-                    </>
+                    dict.cart?.checkout || 'Checkout'
                   )}
                 </Link>
               </Button>
@@ -255,9 +272,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 className="w-full"
                 onClick={onClose}
               >
-                {locale === 'zh' && '继续购物'}
-                {locale === 'ja' && 'ショッピングを続ける'}
-                {locale === 'en' && 'Continue Shopping'}
+                {dict.cart?.continueShopping || 'Continue Shopping'}
               </Button>
             </div>
           )}

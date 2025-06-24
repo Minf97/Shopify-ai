@@ -51,5 +51,18 @@
     "close": "Close",
     "open": "Open",
     "menu": "Menu"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping",
+    "items": "items",
+    "processing": "Processing...",
+    "shippingNote": "Shipping calculated at checkout",
+    "updateFailed": "Update failed",
+    "removeFailed": "Remove failed",
+    "retry": "Retry"
   }
 } 

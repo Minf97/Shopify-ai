@@ -51,5 +51,18 @@
     "close": "閉じる",
     "open": "開く",
     "menu": "メニュー"
+  },
+  "cart": {
+    "title": "ショッピングカート",
+    "empty": "カートは空です",
+    "subtotal": "小計",
+    "checkout": "決済へ進む",
+    "continueShopping": "ショッピングを続ける",
+    "items": "個のアイテム",
+    "processing": "処理中...",
+    "shippingNote": "送料は決済時に計算されます",
+    "updateFailed": "更新に失敗しました",
+    "removeFailed": "削除に失敗しました",
+    "retry": "再試行"
   }
 } 

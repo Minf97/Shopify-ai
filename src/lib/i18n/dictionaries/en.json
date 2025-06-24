@@ -84,5 +84,22 @@
     "productsCount": "products",
     "showMore": "Show More",
     "backToCategories": "Back to Categories"
+  },
+  "products": {
+    "title": "All Products",
+    "description": "Browse our carefully curated product collection",
+    "noProducts": "No products available",
+    "loadingProducts": "Loading products...",
+    "errorLoading": "Failed to load products",
+    "productsCount": "products",
+    "loadMore": "Load More",
+    "sortBy": "Sort By",
+    "sortByTitle": "Name",
+    "sortByPrice": "Price", 
+    "sortByCreated": "Date",
+    "filterBy": "Filter",
+    "allProducts": "All Products",
+    "addToCart": "Add to Cart",
+    "viewDetails": "View Details"
   }
 } 

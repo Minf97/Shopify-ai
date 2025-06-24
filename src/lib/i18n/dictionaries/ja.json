@@ -84,5 +84,22 @@
     "productsCount": "商品",
     "showMore": "もっと見る",
     "backToCategories": "カテゴリーに戻る"
+  },
+  "products": {
+    "title": "全商品",
+    "description": "厳選された商品コレクションをご覧ください",
+    "noProducts": "商品がありません",
+    "loadingProducts": "商品を読み込み中...",
+    "errorLoading": "商品の読み込みに失敗しました",
+    "productsCount": "商品",
+    "loadMore": "もっと読み込む",
+    "sortBy": "並び替え",
+    "sortByTitle": "名前順",
+    "sortByPrice": "価格順",
+    "sortByCreated": "日付順",
+    "filterBy": "フィルター",
+    "allProducts": "全商品",
+    "addToCart": "カートに追加",
+    "viewDetails": "詳細を見る"
   }
 } 

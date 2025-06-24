@@ -64,5 +64,14 @@
     "updateFailed": "Update failed",
     "removeFailed": "Remove failed",
     "retry": "Retry"
+  },
+  "search": {
+    "placeholder": "Search products...",
+    "noResults": "No products found",
+    "startTyping": "Start typing to search products",
+    "popularCategories": "Popular Categories",
+    "suggestions": "Search Suggestions",
+    "searchHistory": "Search History",
+    "clearHistory": "Clear History"
   }
 } 

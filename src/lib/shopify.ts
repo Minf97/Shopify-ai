@@ -137,3 +137,119 @@ export async function fetchProductList(): Promise<IProductListResponst> {
     };
   }
 }
+
+// 获取分类列表
+export async function fetchCollections(): Promise<{ status: number; body?: any; error?: string }> {
+  const collectionsQuery = `
+    query {
+      collections(first: 20) {
+        edges {
+          node {
+            id
+            title
+            handle
+            description
+            image {
+              url
+              altText
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const result = await shopifyFetch(collectionsQuery);
+  if (result.status === 200) {
+    return { status: 200, body: result.body };
+  } else {
+    console.error("Failed to fetch collections:", result.error);
+    return {
+      status: 500,
+      error: result.error || "Failed to fetch collections.",
+    };
+  }
+}
+
+// 根据分类和搜索词获取商品建议
+export async function fetchProductSuggestions(query?: string, collectionHandle?: string): Promise<{ status: number; body?: any; error?: string }> {
+  let productsQuery = `
+    query {
+      products(first: 10${query ? `, query: "${query}"` : ''}) {
+        edges {
+          node {
+            id
+            title
+            handle
+            productType
+            tags
+            images(first: 1) {
+              edges {
+                node {
+                  url
+                  altText
+                }
+              }
+            }
+            collections(first: 1) {
+              edges {
+                node {
+                  title
+                  handle
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  // 如果指定了分类，按分类查询
+  if (collectionHandle) {
+    productsQuery = `
+      query {
+        collection(handle: "${collectionHandle}") {
+          products(first: 10${query ? `, query: "${query}"` : ''}) {
+            edges {
+              node {
+                id
+                title
+                handle
+                productType
+                tags
+                images(first: 1) {
+                  edges {
+                    node {
+                      url
+                      altText
+                    }
+                  }
+                }
+                collections(first: 1) {
+                  edges {
+                    node {
+                      title
+                      handle
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+  }
+
+  const result = await shopifyFetch(productsQuery);
+  if (result.status === 200) {
+    return { status: 200, body: result.body };
+  } else {
+    console.error("Failed to fetch product suggestions:", result.error);
+    return {
+      status: 500,
+      error: result.error || "Failed to fetch product suggestions.",
+    };
+  }
+}

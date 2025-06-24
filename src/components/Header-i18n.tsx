@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { CartDrawer } from "@/components/cart-drawer"
+import { SearchBox } from "@/components/search-box"
 import { 
   ShoppingBag, 
   Search, 
@@ -100,14 +101,14 @@ export function HeaderI18n() {
 
             {/* Center: Search Box - Desktop */}
             <div className="hidden lg:flex flex-1 max-w-md mx-8">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <input
-                  type="search"
-                  placeholder={dict.nav.search}
-                  className="w-full pl-10 pr-4 py-2 text-sm bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring"
-                />
-              </div>
+              <SearchBox 
+                placeholder={dict.nav.search}
+                className="w-full"
+                onSearch={(query: string) => {
+                  console.log('桌面端搜索:', query)
+                  // 这里可以跳转到搜索结果页面
+                }}
+              />
             </div>
 
             {/* Right: Action Buttons */}
@@ -220,14 +221,14 @@ export function HeaderI18n() {
               </div>
 
               {/* Search Box */}
-              <div className="relative mb-6">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <input
-                  type="search"
-                  placeholder={dict.nav.search}
-                  className="w-full pl-10 pr-4 py-2 text-sm bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring"
-                />
-              </div>
+              <SearchBox 
+                placeholder={dict.nav.search}
+                className="mb-6"
+                onSearch={(query: string) => {
+                  console.log('移动端搜索:', query)
+                  // 这里可以跳转到搜索结果页面
+                }}
+              />
 
               {/* Navigation Menu */}
               <nav className="space-y-2 mb-6">

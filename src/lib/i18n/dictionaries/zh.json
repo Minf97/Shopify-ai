@@ -64,5 +64,14 @@
     "updateFailed": "更新失败",
     "removeFailed": "删除失败",
     "retry": "重试"
+  },
+  "search": {
+    "placeholder": "搜索商品...",
+    "noResults": "没有找到相关商品",
+    "startTyping": "开始输入以搜索商品",
+    "popularCategories": "热门分类",
+    "suggestions": "搜索建议",
+    "searchHistory": "搜索历史",
+    "clearHistory": "清除历史"
   }
 } 

@@ -64,5 +64,14 @@
     "updateFailed": "更新に失敗しました",
     "removeFailed": "削除に失敗しました",
     "retry": "再試行"
+  },
+  "search": {
+    "placeholder": "商品を検索...",
+    "noResults": "商品が見つかりません",
+    "startTyping": "商品を検索するために入力を開始してください",
+    "popularCategories": "人気のカテゴリー",
+    "suggestions": "検索候補",
+    "searchHistory": "検索履歴",
+    "clearHistory": "履歴をクリア"
   }
 } 

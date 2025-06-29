@@ -1,0 +1,200 @@
+{
+  "nav": {
+    "products": "商品",
+    "categories": "カテゴリー", 
+    "collections": "コレクション",
+    "cartDetails": "カート詳細",
+    "about": "会社概要",
+    "home": "ホーム",
+    "signIn": "ログイン",
+    "signOut": "ログアウト",
+    "profile": "プロフィール",
+    "account": "アカウント",
+    "orders": "注文履歴",
+    "search": "商品を検索...",
+    "wishlist": "ウィッシュリスト",
+    "cart": "カート",
+    "faq": "よくある質問"
+  },
+  "hero": {
+    "tagline": "厳選された優美",
+    "title": "グレース",
+    "description": "シンプルさの中に美を発見する。洗練されたライフスタイルのためのプレミアム商品。",
+    "exploreCollection": "コレクションを探索",
+    "watchStory": "私たちのストーリー"
+  },
+  "stats": {
+    "customers": "満足のお客様", 
+    "products": "プレミアム商品",
+    "rating": "平均評価",
+    "support": "サポート"
+  },
+  "sections": {
+    "featuredCollection": "注目のコレクション",
+    "handpicked": "優秀さのために厳選",
+    "viewAll": "すべて表示",
+    "bestSeller": "ベストセラー",
+    "addToCart": "カートに追加",
+    "trendingNow": "トレンド",
+    "allCategories": "全カテゴリー",
+    "featured": "注目",
+    "trending": "トレンド", 
+    "new": "新商品",
+    "sale": "セール"
+  },
+  "features": {
+    "freeShipping": "送料無料",
+    "freeShippingDesc": "100ドル以上のご注文で送料無料",
+    "securePayment": "安全な決済", 
+    "securePaymentDesc": "お客様の決済情報は安全です",
+    "customerSupport": "24時間サポート",
+    "customerSupportDesc": "24時間体制のカスタマーサービス"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "tryAgain": "再試行",
+    "close": "閉じる",
+    "open": "開く",
+    "menu": "メニュー"
+  },
+  "auth": {
+    "welcomeBack": "おかえりなさい",
+    "signInDescription": "アカウントにサインインして続行",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "forgotPassword": "パスワードを忘れた？",
+    "rememberMe": "30日間ログイン状態を保持",
+    "signIn": "サインイン",
+    "createAccount": "アカウント作成",
+    "orContinueWith": "または続行",
+    "dontHaveAccount": "アカウントをお持ちでない？",
+    "signUpHere": "こちらでサインアップ"
+  },
+  "cart": {
+    "title": "ショッピングカート",
+    "empty": "カートは空です",
+    "subtotal": "小計",
+    "checkout": "決済へ進む",
+    "continueShopping": "ショッピングを続ける",
+    "items": "個のアイテム",
+    "processing": "処理中...",
+    "shippingNote": "送料は決済時に計算されます",
+    "updateFailed": "更新に失敗しました",
+    "removeFailed": "削除に失敗しました",
+    "retry": "再試行",
+    "detailsTitle": "カート詳細",
+    "quantity": "数量",
+    "price": "価格",
+    "total": "合計",
+    "remove": "削除",
+    "update": "更新",
+    "recommendedProducts": "おすすめ商品",
+    "similarProducts": "類似商品",
+    "basedOnCart": "カート内商品に基づく推奨",
+    "addToCart": "カートに追加",
+    "backToShopping": "ショッピングに戻る",
+    "proceedToCheckout": "決済に進む",
+    "cartSummary": "カート概要",
+    "shippingCalculated": "送料は決済時に計算"
+  },
+  "search": {
+    "placeholder": "商品を検索...",
+    "noResults": "商品が見つかりません",
+    "startTyping": "商品を検索するために入力を開始してください",
+    "popularCategories": "人気のカテゴリー",
+    "suggestions": "検索候補",
+    "searchHistory": "検索履歴",
+    "clearHistory": "履歴をクリア"
+  },
+  "categories": {
+    "title": "商品カテゴリー",
+    "description": "商品カテゴリーを閲覧して、お気に入りのアイテムを見つけてください",
+    "allCategories": "全カテゴリー",
+    "noProducts": "このカテゴリーには商品がありません",
+    "loadingProducts": "商品を読み込み中...",
+    "errorLoading": "読み込みに失敗しました。再試行してください",
+    "productsCount": "商品",
+    "showMore": "もっと見る",
+    "backToCategories": "カテゴリーに戻る"
+  },
+  "products": {
+    "title": "全商品",
+    "description": "厳選された商品コレクションをご覧ください",
+    "noProducts": "商品がありません",
+    "loadingProducts": "商品を読み込み中...",
+    "errorLoading": "商品の読み込みに失敗しました",
+    "productsCount": "商品",
+    "loadMore": "もっと読み込む",
+    "sortBy": "並び替え",
+    "sortByTitle": "名前順",
+    "sortByPrice": "価格順",
+    "sortByCreated": "日付順",
+    "filterBy": "フィルター",
+    "allProducts": "全商品",
+    "addToCart": "カートに追加",
+    "viewDetails": "詳細を見る"
+  },
+  "faq": {
+    "title": "よくある質問",
+    "description": "当社のインテリジェントアシスタントが商品、注文、配送などの様々な質問にお答えします",
+    "chatTitle": "AIカスタマーサービス",
+    "chatSubtitle": "お気軽に何でもお聞きください",
+    "placeholder": "ご質問をこちらにご入力ください...",
+    "send": "送信",
+    "typing": "入力中...",
+    "thinkingTitle": "AIが考えています...",
+    "welcomeMessage": "こんにちは！私はあなた専属のショッピングアシスタントです。商品情報、注文状況、その他ショッピング関連のご質問など、お気軽にお聞きください！",
+    "commonQuestions": "よくある質問",
+    "quickReplies": [
+      "注文状況を確認するには？",
+      "返品ポリシーは何ですか？",
+      "配送にはどのくらいかかりますか？",
+      "どのような支払い方法がありますか？",
+      "カスタマーサービスに連絡するには？"
+    ],
+    "suggestions": {
+      "orderStatus": "注文状況確認について",
+      "shipping": "配送サービスについて",
+      "returns": "返品ポリシーについて",
+      "payment": "支払い方法について",
+      "contact": "カスタマーサービスへのお問い合わせ"
+    },
+    "aiAssistant": "AIアシスタント",
+    "you": "あなた",
+    "errorMessage": "申し訳ございませんが、問題が発生しました。後ほど再試行してください。",
+    "retryButton": "再試行",
+    "clearChat": "チャットをクリア",
+    "newChat": "新しいチャット"
+  },
+  "testRag": {
+    "title": "RAGチャットボットテスト",
+    "description": "これは検索拡張生成（RAG）技術に基づくインテリジェントなチャットボットです。あなたが教えた情報を学習し記憶し、その後の会話でその知識を使って質問に答えることができます。",
+    "chatTitle": "RAG知識アシスタント",
+    "chatSubtitle": "情報を教えてください。必要な時に記憶して使用します",
+    "placeholder": "情報を教えるか、質問をしてください...",
+    "send": "送信",
+    "typing": "考えています...",
+    "welcomeMessage": "こんにちは！私はRAGチャットボットです。任意の情報を教えていただければ、それを知識ベースに保存します。その後、関連する質問をしていただければ、以前に提供された情報に基づいて回答します。",
+    "features": {
+      "learn": "学習能力",
+      "learnDesc": "提供された任意の情報を学習し記憶できます",
+      "recall": "知識検索",
+      "recallDesc": "類似性検索を使用して関連情報を素早く見つけます",
+      "contextual": "文脈理解",
+      "contextualDesc": "質問を知的に理解し、正確な回答を提供します"
+    },
+    "examples": {
+      "title": "使用例",
+      "add1": "私の誕生日は1990年5月15日です",
+      "add2": "私の好きな色は青です",
+      "add3": "私は上海に住んでいて、ソフトウェア開発の仕事をしています",
+      "query1": "私の誕生日はいつですか？",
+      "query2": "私の情報を教えてください"
+    },
+    "toolCalls": {
+      "addResource": "知識ベースに情報を追加しています...",
+      "getInformation": "関連情報を検索しています..."
+    }
+  }
+} 

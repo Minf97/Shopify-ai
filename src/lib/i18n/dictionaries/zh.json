@@ -1,0 +1,200 @@
+{
+  "nav": {
+    "products": "产品",
+    "categories": "分类", 
+    "collections": "系列",
+    "cartDetails": "购物车详情",
+    "about": "关于我们",
+    "home": "首页",
+    "signIn": "登录",
+    "signOut": "退出登录",
+    "profile": "个人中心",
+    "account": "账户设置",
+    "orders": "我的订单",
+    "search": "搜索产品...",
+    "wishlist": "心愿单",
+    "cart": "购物车",
+    "faq": "常见问题"
+  },
+  "hero": {
+    "tagline": "精选臻品",
+    "title": "优雅",
+    "description": "在简约中发现美好。为精致生活而生的优质产品。",
+    "exploreCollection": "探索系列",
+    "watchStory": "我们的故事"
+  },
+  "stats": {
+    "customers": "满意客户", 
+    "products": "精品产品",
+    "rating": "平均评分",
+    "support": "客服支持"
+  },
+  "sections": {
+    "featuredCollection": "精选系列",
+    "handpicked": "精心挑选的卓越品质",
+    "viewAll": "查看全部",
+    "bestSeller": "畅销产品",
+    "addToCart": "加入购物车",
+    "trendingNow": "热门推荐",
+    "allCategories": "全部分类",
+    "featured": "精选",
+    "trending": "热门", 
+    "new": "新品",
+    "sale": "促销"
+  },
+  "features": {
+    "freeShipping": "免费配送",
+    "freeShippingDesc": "满100美元免费配送",
+    "securePayment": "安全支付", 
+    "securePaymentDesc": "您的支付信息安全可靠",
+    "customerSupport": "24/7客服",
+    "customerSupportDesc": "全天候客户服务"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "tryAgain": "重试",
+    "close": "关闭",
+    "open": "打开",
+    "menu": "菜单"
+  },
+  "auth": {
+    "welcomeBack": "欢迎回来",
+    "signInDescription": "登录您的账户以继续",
+    "email": "邮箱",
+    "password": "密码",
+    "forgotPassword": "忘记密码？",
+    "rememberMe": "记住我 30 天",
+    "signIn": "登录",
+    "createAccount": "创建账户",
+    "orContinueWith": "或继续使用",
+    "dontHaveAccount": "还没有账户？",
+    "signUpHere": "在这里注册"
+  },
+  "cart": {
+    "title": "购物车",
+    "empty": "购物车为空",
+    "subtotal": "小计",
+    "checkout": "结账",
+    "continueShopping": "继续购物",
+    "items": "件商品",
+    "processing": "处理中...",
+    "shippingNote": "运费将在结账时计算",
+    "updateFailed": "更新失败",
+    "removeFailed": "删除失败",
+    "retry": "重试",
+    "detailsTitle": "购物车详情",
+    "quantity": "数量",
+    "price": "价格",
+    "total": "总计",
+    "remove": "移除",
+    "update": "更新",
+    "recommendedProducts": "推荐商品",
+    "similarProducts": "相似商品",
+    "basedOnCart": "根据您的购物车商品推荐",
+    "addToCart": "加入购物车",
+    "backToShopping": "返回购物",
+    "proceedToCheckout": "前往结算",
+    "cartSummary": "购物车汇总",
+    "shippingCalculated": "运费在结算时计算"
+  },
+  "search": {
+    "placeholder": "搜索商品...",
+    "noResults": "没有找到相关商品",
+    "startTyping": "开始输入以搜索商品",
+    "popularCategories": "热门分类",
+    "suggestions": "搜索建议",
+    "searchHistory": "搜索历史",
+    "clearHistory": "清除历史"
+  },
+  "categories": {
+    "title": "商品分类",
+    "description": "浏览我们的商品分类，发现您喜爱的产品",
+    "allCategories": "全部分类",
+    "noProducts": "该分类暂无商品",
+    "loadingProducts": "正在加载商品...",
+    "errorLoading": "加载失败，请重试",
+    "productsCount": "件商品",
+    "showMore": "显示更多",
+    "backToCategories": "返回分类"
+  },
+  "products": {
+    "title": "所有商品",
+    "description": "浏览我们精心挑选的产品系列",
+    "noProducts": "暂无商品",
+    "loadingProducts": "正在加载商品...",
+    "errorLoading": "商品加载失败",
+    "productsCount": "件商品",
+    "loadMore": "加载更多",
+    "sortBy": "排序方式",
+    "sortByTitle": "按名称",
+    "sortByPrice": "按价格",
+    "sortByCreated": "按时间",
+    "filterBy": "筛选",
+    "allProducts": "全部商品",
+    "addToCart": "加入购物车",
+    "viewDetails": "查看详情"
+  },
+  "faq": {
+    "title": "常见问题",
+    "description": "我们的智能助手可以帮您解答关于产品、订单、配送等各种问题",
+    "chatTitle": "智能客服助手",
+    "chatSubtitle": "有任何问题都可以问我",
+    "placeholder": "请输入您的问题...",
+    "send": "发送",
+    "typing": "正在输入中...",
+    "thinkingTitle": "AI 正在思考...",
+    "welcomeMessage": "您好！我是您的专属购物助手。无论您需要了解产品信息、订单状态还是有任何购物相关的问题，都可以随时问我！",
+    "commonQuestions": "常见问题",
+    "quickReplies": [
+      "如何查看订单状态？",
+      "退换货政策是什么？",
+      "配送时间多久？",
+      "支付方式有哪些？",
+      "如何联系客服？"
+    ],
+    "suggestions": {
+      "orderStatus": "关于订单状态查询",
+      "shipping": "关于配送服务", 
+      "returns": "关于退换货政策",
+      "payment": "关于支付方式",
+      "contact": "联系客服"
+    },
+    "aiAssistant": "AI 助手",
+    "you": "您",
+    "errorMessage": "抱歉，出现了一些问题，请稍后重试。",
+    "retryButton": "重试",
+    "clearChat": "清空对话",
+    "newChat": "新对话"
+  },
+  "testRag": {
+    "title": "RAG 聊天机器人测试",
+    "description": "这是一个基于检索增强生成(RAG)技术的智能聊天机器人。它可以学习和记住您告诉它的信息，并在后续对话中使用这些知识来回答问题。",
+    "chatTitle": "RAG 知识库助手",
+    "chatSubtitle": "告诉我一些信息，我会记住并在需要时使用",
+    "placeholder": "您可以告诉我一些信息，或者问我问题...",
+    "send": "发送",
+    "typing": "正在思考中...",
+    "welcomeMessage": "您好！我是一个RAG聊天机器人。您可以告诉我任何信息，我会将其存储在我的知识库中。之后您可以问我相关问题，我会基于您之前提供的信息来回答。",
+    "features": {
+      "learn": "学习能力",
+      "learnDesc": "我可以学习并记住您提供的任何信息",
+      "recall": "知识检索",
+      "recallDesc": "基于相似性搜索快速找到相关信息",
+      "contextual": "上下文理解",
+      "contextualDesc": "智能理解问题并提供准确答案"
+    },
+    "examples": {
+      "title": "使用示例",
+      "add1": "我的生日是1990年5月15日",
+      "add2": "我最喜欢的颜色是蓝色",
+      "add3": "我住在上海，从事软件开发工作",
+      "query1": "我的生日是什么时候？",
+      "query2": "告诉我关于我的信息"
+    },
+    "toolCalls": {
+      "addResource": "正在添加信息到知识库...",
+      "getInformation": "正在搜索相关信息..."
+    }
+  }
+} 

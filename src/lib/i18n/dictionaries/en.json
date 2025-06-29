@@ -1,0 +1,200 @@
+{
+    "nav": {
+    "products": "Products",
+    "categories": "Categories",
+    "collections": "Collections",
+    "cartDetails": "Cart Details",
+    "about": "About Us",
+    "home": "Home",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "profile": "Profile",
+    "account": "Account",
+    "orders": "My Orders",
+    "search": "Search products...",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "faq": "FAQ"
+  },
+  "hero": {
+    "tagline": "Curated Excellence",
+    "title": "Grace",
+    "description": "Discover beauty in simplicity. Premium products for the refined lifestyle.",
+    "exploreCollection": "Explore Collection",
+    "watchStory": "Our Story"
+  },
+  "stats": {
+    "customers": "Happy Customers", 
+    "products": "Premium Products",
+    "rating": "Average Rating",
+    "support": "Support"
+  },
+  "sections": {
+    "featuredCollection": "Featured Collection",
+    "handpicked": "Handpicked for excellence",
+    "viewAll": "View All",
+    "bestSeller": "Best Seller",
+    "addToCart": "Add to Cart",
+    "trendingNow": "Trending Now",
+    "allCategories": "All Categories",
+    "featured": "Featured",
+    "trending": "Trending", 
+    "new": "New",
+    "sale": "Sale"
+  },
+  "features": {
+    "freeShipping": "Free Shipping",
+    "freeShippingDesc": "Free shipping on orders over $100",
+    "securePayment": "Secure Payment", 
+    "securePaymentDesc": "Your payment information is safe",
+    "customerSupport": "24/7 Support",
+    "customerSupportDesc": "Round the clock customer service"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "tryAgain": "Try Again",
+    "close": "Close",
+    "open": "Open",
+    "menu": "Menu"
+  },
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "signInDescription": "Sign in to your account to continue",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me for 30 days",
+    "signIn": "Sign in",
+    "createAccount": "Create Account",
+    "orContinueWith": "Or continue with",
+    "dontHaveAccount": "Don't have an account?",
+    "signUpHere": "Sign up here"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping",
+    "items": "items",
+    "processing": "Processing...",
+    "shippingNote": "Shipping calculated at checkout",
+    "updateFailed": "Update failed",
+    "removeFailed": "Remove failed",
+    "retry": "Retry",
+    "detailsTitle": "Cart Details",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total",
+    "remove": "Remove",
+    "update": "Update",
+    "recommendedProducts": "Recommended Products",
+    "similarProducts": "Similar Products",
+    "basedOnCart": "Based on items in your cart",
+    "addToCart": "Add to Cart",
+    "backToShopping": "Back to Shopping",
+    "proceedToCheckout": "Proceed to Checkout",
+    "cartSummary": "Cart Summary",
+    "shippingCalculated": "Shipping calculated at checkout"
+  },
+  "search": {
+    "placeholder": "Search products...",
+    "noResults": "No products found",
+    "startTyping": "Start typing to search products",
+    "popularCategories": "Popular Categories",
+    "suggestions": "Search Suggestions",
+    "searchHistory": "Search History",
+    "clearHistory": "Clear History"
+  },
+  "categories": {
+    "title": "Product Categories",
+    "description": "Browse our product categories and discover your favorite items",
+    "allCategories": "All Categories",
+    "noProducts": "No products in this category",
+    "loadingProducts": "Loading products...",
+    "errorLoading": "Failed to load, please try again",
+    "productsCount": "products",
+    "showMore": "Show More",
+    "backToCategories": "Back to Categories"
+  },
+  "products": {
+    "title": "All Products",
+    "description": "Browse our carefully curated product collection",
+    "noProducts": "No products available",
+    "loadingProducts": "Loading products...",
+    "errorLoading": "Failed to load products",
+    "productsCount": "products",
+    "loadMore": "Load More",
+    "sortBy": "Sort By",
+    "sortByTitle": "Name",
+    "sortByPrice": "Price", 
+    "sortByCreated": "Date",
+    "filterBy": "Filter",
+    "allProducts": "All Products",
+    "addToCart": "Add to Cart",
+    "viewDetails": "View Details"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "description": "Our intelligent assistant can help you with product, order, shipping and other questions",
+    "chatTitle": "AI Customer Service",
+    "chatSubtitle": "Feel free to ask me anything",
+    "placeholder": "Type your question here...",
+    "send": "Send",
+    "typing": "Typing...",
+    "thinkingTitle": "AI is thinking...",
+    "welcomeMessage": "Hello! I'm your personal shopping assistant. Whether you need product information, order status, or have any shopping-related questions, feel free to ask!",
+    "commonQuestions": "Common Questions",
+    "quickReplies": [
+      "How to check order status?",
+      "What's the return policy?",
+      "How long does shipping take?",
+      "What payment methods are available?",
+      "How to contact customer service?"
+    ],
+    "suggestions": {
+      "orderStatus": "About order status inquiry",
+      "shipping": "About shipping service",
+      "returns": "About return policy", 
+      "payment": "About payment methods",
+      "contact": "Contact customer service"
+    },
+    "aiAssistant": "AI Assistant",
+    "you": "You",
+    "errorMessage": "Sorry, something went wrong. Please try again later.",
+    "retryButton": "Retry",
+    "clearChat": "Clear Chat",
+    "newChat": "New Chat"
+  },
+  "testRag": {
+    "title": "RAG Chatbot Test",
+    "description": "This is an intelligent chatbot based on Retrieval-Augmented Generation (RAG) technology. It can learn and remember information you tell it, and use this knowledge to answer questions in subsequent conversations.",
+    "chatTitle": "RAG Knowledge Assistant",
+    "chatSubtitle": "Tell me some information, and I'll remember and use it when needed",
+    "placeholder": "You can tell me some information, or ask me questions...",
+    "send": "Send",
+    "typing": "Thinking...",
+    "welcomeMessage": "Hello! I'm a RAG chatbot. You can tell me any information, and I'll store it in my knowledge base. Then you can ask me related questions, and I'll answer based on the information you previously provided.",
+    "features": {
+      "learn": "Learning Ability",
+      "learnDesc": "I can learn and remember any information you provide",
+      "recall": "Knowledge Retrieval",
+      "recallDesc": "Quickly find relevant information using similarity search",
+      "contextual": "Contextual Understanding",
+      "contextualDesc": "Intelligently understand questions and provide accurate answers"
+    },
+    "examples": {
+      "title": "Usage Examples",
+      "add1": "My birthday is May 15, 1990",
+      "add2": "My favorite color is blue",
+      "add3": "I live in Shanghai and work in software development",
+      "query1": "When is my birthday?",
+      "query2": "Tell me about my information"
+    },
+    "toolCalls": {
+      "addResource": "Adding information to knowledge base...",
+      "getInformation": "Searching for relevant information..."
+    }
+  }
+} 

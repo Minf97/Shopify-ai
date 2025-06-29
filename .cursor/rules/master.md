@@ -1,0 +1,48 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+
+# code
+在还原设计稿，或编写 tsx时，请注意`使用 HTML5 语义化标签`，优化SEO，同时要结合 Nextjs 能力例如`a 标签要替换为 Link 标签`，`img 标签要替换为 Image 标签`；
+
+## SEO
+我们要**尤其注重 SEO 优化**，因此在每次我们新建页面时，都需要完成`metadata`的编写，如果能够写`jsonld`，就需要完成`jsonld`数据体。同时在`sitemap`中记录本页面。
+
+## design
+在设计方面，我们首先要**支持响应式**，然后色彩方面要尽可能**复用已存在的 tailwind 变量**，它们都在`global.css`文件中，如果需要写新的 css 变量，注意：
+- 检查`global.css`文件，不允许出现重复的变量！
+- 将新变量写在`variable.css`文件，不允许写在`global.css`文件中！ 
+- 如果是按钮或者链接等等`可交互式内容`，请注意添加`cursor-pointer`，让鼠标变成可点击状
+- 如果是`可交互式内容`，一般可能会额外出现两种样式形态：`鼠标 hover 态`、`鼠标点击态`，除非我要求，否则 hover 时不要"scale"变大或变小，只需要颜色上有一定的区分即可。也就是说，色值会有"普通","hover", "active"三种，一般hover 会浅一些，active会深一些。
+- 如果有图片，而我们没有 mock 的图片链接，可以参考该网站文档`https://picsum.photos/`，他会返回随机的图片，且可以自定义图片宽高大小
+
+关于组件方面：
+- 请你尽量使用`shadcn`组件，如果样式有变化，请在`shadcn`组件的基础上进行样式调整。shadcn组件都在`components/ui`文件夹里面。
+- 除了`shadcn`组件以外，还有 shadcn 基础上进行封装的 `magicui`组件库，请你**尽可能**使用该组件库完成业务需求！
+- magicui 的组件库文档在这里：https://magicui.design/docs/components/marquee
+- shadcn 的组件库文档在这里：https://ui.shadcn.com/docs/components
+
+## locale
+当你要获取多语言时，请记住：
+- 可以参考 `next-intl` 的文档: https://next-intl.dev/
+- 服务端获取语言，可以直接从 params 中获取
+- 客户端获取语言，可以使用 useLocale() 获取
+- 请不要将 locale 作为组件的入参！
+
+# Request
+request 请求在 Nextjs 中分为服务端请求和客户端请求，在本项目中要求如下
+- 所有的请求，请尽量放在 `app/api/` 目录下，如果你认为某个接口不能放在这里，请告诉我原因。
+- 对于服务端请求，用 Nextjs 原生的 fetch 即可，最大程度支持并使用 Nextjs 对原生 fetch 做的优化措施。
+- 对于客户端请求，请使用 @ahook 的 `useRequest` 等等 hooks 用法，尤其利用好他的 @cache & swc 能力。
+
+## Supabase
+本项目使用 [supabase](mdc:https:/supabase.com/docs) 作为数据库，相关代码在 `lib/supabase/` 目录下，请你遵循 `supabase` 的最佳实践，完成相关编程内容。
+
+## Shopify
+本项目由于商品等内容都在 `shopify` 后台中，因此你需要使用符合 `graphql` 规范的方式，请求 shopify。相关的代码在 `lib/shopify` 文件中，我建议后续对于 `shopify` 的接口封装也都放在这个文件中，例如：商品列表查询、购物车查询等等。
+
+## ai
+ai 方面我使用了 `ai sdk`, 文档链接是：https://ai-sdk.dev/。
